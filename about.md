@@ -13,4 +13,4 @@ to image processing. She's also taught programming courses in Python and in Java
 
 ### Contact me
 
-[email@domain.com](mailto:cezannec@alumni.stanford.edu)
+[cezannec@alumni.stanford.edu](mailto:cezannec@alumni.stanford.edu)
