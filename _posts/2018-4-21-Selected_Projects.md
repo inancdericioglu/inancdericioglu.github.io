@@ -9,7 +9,7 @@ when I first began to teach.
 <!--more-->
 
 
-### Project 1: Activity Recognition
+## Project 1: Activity Recognition
 
 Using physiological data collected by wearable technology, such as the acceleration and heat flux of a person's body, 
 this project intelligently characterizes the activity a user performed.
@@ -40,7 +40,7 @@ We did get the best performance using supervised algorithms, but this project di
 how unsupervised approaches might be improved.
 
 
-### Project 2: Cell Detection
+## Project 2: Cell Detection
 
 This project uses supervised learning algorithms and graph-mining techniques to automatically count and detect embryonic cells as they grow.
 
@@ -50,4 +50,19 @@ Cell detection and counting in the context of biology research is largely a labo
 <img src="/assets/cell_detection_svm.png">
 </p>
 
-The graph-mining approach was very interesting in that it relied on constructing a graph that separated individual cells based on patterns of intensity in a given image. A cell nucleus was very bright, but its edges were darker, and by identifying areas of brightness, and after eliminating spurious connections between cells and trying to account for overlap, graph-mining worked well.
+The graph-mining approach was very interesting because it relied on constructing a graph that separated individual cells based on patterns of intensity in a given image. A cell nucleus was very bright, but its edges and the background were darker. So by identifying areas of brightness, after eliminating spurious connections between cells and trying to account for overlap, graph-mining worked well.
+
+
+## Project 3: Depth Estimation
+
+This project uses pairs of photos taken by an endoscope at slightly different depths and a SIFT algorithm to estimate the depth map for an area of interest.
+
+<p align="center"> 
+<img src="/assets/depth_map.png">
+</p>
+
+SIFT was used to create feature descriptors for two endoscopic images, taken at different depths. Using the SIFT descriptors, we identified the best-matching points in the pair of images and used those to calculate a transformation between the two images. From this transformation we extracted an estimation for the distance between the end of the endoscope and the objects in the images.
+
+
+
+
