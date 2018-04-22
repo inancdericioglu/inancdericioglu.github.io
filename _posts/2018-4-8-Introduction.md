@@ -1,10 +1,12 @@
 ---
 layout: post
-title: First post
+title: Past Projects and Research
 ---
 
 I spend a lot of my time learning and creating, and I'm trying to be better about documenting the process.
 To that end, this post will be a summary of some projects I worked on with colleagues while I was in school and when I first began to teach.
+<!--more-->
+
 
 **Project 1: Activity Recognition**
 
@@ -24,7 +26,7 @@ The thinking was: a supervised algorithm might be the most accurate, but a good,
 would be ideal, since it takes a while to create richly-labeled data for training.
 
 <div class="img-div" markdown="0">
-<img src='assets/activity_rec.png' alt="LDA 3 class recognition" width=50% />
+<img src='/assets/activity_rec.png' alt="LDA 3 class recognition" width=50% />
 </div>
 
 In the image above, you can see an example of data separation done with linear discriminant analysis (LDA).
