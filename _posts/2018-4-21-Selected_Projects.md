@@ -28,7 +28,7 @@ The thinking was: a supervised algorithm might be the most accurate, but a good,
 would be ideal, since it takes a while to create richly-labeled data for training.
 
 <p align="center"> 
-<img src="/assets/activity_rec.png">
+<img src="/assets/activity_rec.png" alt="LDA separated data into three classes: sleeping, watching TV, or other" >
 </p>
 
 **Linear Discriminant Analysis**
@@ -59,13 +59,13 @@ Cell detection and counting in the context of biology research is largely a labo
 To perform graph-mining, we constructed a graph that separated individual cells based on patterns of intensity in a given image. A cell nucleus was very bright, but its edges and the background were darker. So, in this approach, each cell in an image is modeled as a smooth 2D function that has a single local maxima in its neighborhood. We used this model to perform histogram segmentation.
 
 <p align="center"> 
-<img src="/assets/hist_segmentation.png">
+<img src="/assets/hist_segmentation.png" alt="Cells segmented into different areas by brightness" >
 </p>
 
 We traversed the histogram from the brightest range to the darkest, and assigned a numerical label to each pixel in the image, such that pixels with higher intensities have smaller label values (as you can see in the above image). Then we used these numbered segments to construct a graph.
 
 <p align="center"> 
-<img src="/assets/cell_graph.png">
+<img src="/assets/cell_graph.png" alt="A graph corresponding to several cells" >
 </p>
 
 We used a matrix representation for this graph. Then, for each pixel in the segmented image, looked at four neighboring pixel labels to populate the matrix. Once the undirected graph was created, every cell in the input image had an associated simple path in that graph, and the intensity-peak of each cell was marked as the location of that cell. 
@@ -78,7 +78,7 @@ We also took some extra processing steps to account for multiple peaks in one ce
 This project uses pairs of photos taken by an endoscope at slightly different depths and a SIFT algorithm to estimate the depth map for an area of interest.
 
 <p align="center"> 
-<img src="/assets/depth_map.png">
+<img src="/assets/depth_map.png" alt="Depth image of a simulated image of a metronome" >
 </p>
 
 SIFT was used to create feature descriptors for two endoscopic images, taken at different depths. Using the SIFT descriptors, we identified the best-matching points in the pair of images and used those to calculate a transformation between the two images. From this transformation we extracted an estimation for the distance between the end of the endoscope and the objects in the images.
@@ -91,10 +91,10 @@ In my research as an undergraduate, I studied the construction of and uses cases
 
 
 <p align="center"> 
-<img src="/assets/dna_gate3.png">
+<img src="/assets/dna_gate3.png" alt="DNA logic gate with some input and output strands" >
 </p>
 
-The output strand typically has a fluorescent tag on it that can be measured once the strand is released (the signal is suppressed when the output strand is in a double-stranded configuration). Building off of this structure, pairs of gates can be used together to create AND and OR logic gates. These gates have the potential to be used in transistors or even in medicine that can target cells by their DNA/RNA markers.
+A couple input strands can be added to a gate that starts out, paired with some output strands. The inputs start base-pairing with the gate and displacing the output strands. The final output strand typically has a fluorescent tag on it that can be measured once the strand is released (the signal is suppressed when the output strand is in a double-stranded configuration). Building off of this structure, pairs of gates can be used together to create AND and OR logic gates. These gates have the potential to be used in transistors or even in medicine that can target cells by their DNA/RNA markers.
 
 ---
 
