@@ -25,9 +25,7 @@ To approach this challenge, we compared unsupervised learning algorithms with su
 The thinking was: a supervised algorithm might be the most accurate, but a good, unsupervised algorithm 
 would be ideal, since it takes a while to create richly-labeled data for training.
 
-<div class="img-div" markdown="0">
-<img src='/assets/activity_rec.png' alt="LDA 3 class recognition" width=50% />
-</div>
+![LDA 3 class separatuion]({{ site.baseurl }}/assets/activity_rec.png)
 
 In the image above, you can see an example of data separation done with linear discriminant analysis (LDA).
 LDA reduces the feature dimension; the features are the different types of collected sensor data 
