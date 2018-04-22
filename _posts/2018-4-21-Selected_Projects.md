@@ -4,11 +4,12 @@ title: Past Projects and Research
 ---
 
 I spend a lot of my time learning and creating, and I'm trying to be better about documenting the process.
-To that end, this post will be a summary of some projects I worked on with colleagues while I was in school and when I first began to teach.
+To that end, this post will be a summary of some projects I worked on with colleagues while I was in school and 
+when I first began to teach.
 <!--more-->
 
 
-**Project 1: Activity Recognition**
+### Project 1: Activity Recognition
 
 Using physiological data collected by wearable technology, such as the acceleration and heat flux of a person's body, 
 this project intelligently characterizes the activity a user performed.
