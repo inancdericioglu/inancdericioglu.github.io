@@ -94,7 +94,7 @@ In my research as an undergraduate, I studied the construction of and uses cases
 <img src="/assets/dna_gate3.png" alt="DNA logic gate with some input and output strands" >
 </p>
 
-A couple input strands can be added to a gate that starts out, paired with some output strands. The inputs start base-pairing with the gate and displacing the output strands. The final output strand typically has a fluorescent tag on it that can be measured once the strand is released (the signal is suppressed when the output strand is in a double-stranded configuration). Building off of this structure, pairs of gates can be used together to create AND and OR logic gates. These gates have the potential to be used in transistors or even in medicine that can target cells by their DNA/RNA markers.
+Input strands are combined with a gate, then these inputs start base-pairing with the gate and displacing the output strands. The final output strand typically has a fluorescent tag on it that can be measured once the strand is released (the signal is suppressed when the output strand is in a double-stranded configuration). Building off of this structure, pairs of gates can be used together to create AND and OR logic gates. These gates have the potential to be used in transistors or even in medicine that can target cells by their DNA/RNA markers.
 
 ---
 
