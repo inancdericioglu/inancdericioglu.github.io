@@ -70,7 +70,7 @@ In my research as an undergraduate, I studied the construction of and uses cases
 
 
 <p align="center"> 
-<img src="/assets/dna_gate.png">
+<img src="/assets/dna_gate2.png">
 </p>
 
 ## Project 5: DNA-Mediated Lithography
