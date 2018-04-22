@@ -8,6 +8,7 @@ To that end, this post will be a summary of some projects I worked on with colle
 when I first began to teach.
 <!--more-->
 
+---
 
 ## Project 1: Activity Recognition
 
@@ -30,6 +31,8 @@ would be ideal, since it takes a while to create richly-labeled data for trainin
 <img src="/assets/activity_rec.png">
 </p>
 
+**Linear Discriminant Analysis**
+
 In the image above, you can see an example of data separation done with linear discriminant analysis (LDA).
 LDA reduces the feature dimension; the features are the different types of collected sensor data 
 like age, acceleration, heat flux, and body temperature. So, for several features, LDA squashes them into 2D space, 
@@ -39,6 +42,7 @@ and it models the difference between the three classes.
 We did get the best performance using supervised algorithms, but this project did get me thinking about  
 how unsupervised approaches might be improved.
 
+---
 
 ## Project 2: Cell Detection
 
@@ -50,8 +54,24 @@ Cell detection and counting in the context of biology research is largely a labo
 <img src="/assets/cell_detection_svm.png">
 </p>
 
-The graph-mining approach was very interesting because it relied on constructing a graph that separated individual cells based on patterns of intensity in a given image. A cell nucleus was very bright, but its edges and the background were darker. So by identifying areas of brightness, after eliminating spurious connections between cells and trying to account for overlap, graph-mining worked well.
+**Graph Construction**
 
+To perform graph-mining, we constructed a graph that separated individual cells based on patterns of intensity in a given image. A cell nucleus was very bright, but its edges and the background were darker. So, in this approach, each cell in an image is modeled as a smooth 2D function that has a single local maxima in its neighborhood. We used this model to perform histogram segmentation.
+
+<p align="center"> 
+<img src="/assets/hist_segmentation.png">
+</p>
+
+We traversed the histogram from the brightest range to the darkest, and assigned a numerical label to each pixel in the image, such that pixels with higher intensities have smaller label values (as you can see in the above image). Then we used these numbered segments to construct a graph.
+
+<p align="center"> 
+<img src="/assets/cell_graph.png">
+</p>
+
+We used a matrix representation for this graph. Then, for each pixel in the segmented image, looked at four neighboring pixel labels to populate the matrix. Once the undirected graph was created, every cell in the input image had an associated simple path in that graph, and the intensity-peak of each cell was marked as the location of that cell. 
+We also took some extra processing steps to account for multiple peaks in one cell, and to account for some cell overlap, and eventually found that graph-mining worked well.
+
+---
 
 ## Project 3: Depth Estimation
 
@@ -63,19 +83,27 @@ This project uses pairs of photos taken by an endoscope at slightly different de
 
 SIFT was used to create feature descriptors for two endoscopic images, taken at different depths. Using the SIFT descriptors, we identified the best-matching points in the pair of images and used those to calculate a transformation between the two images. From this transformation we extracted an estimation for the distance between the end of the endoscope and the objects in the images.
 
+---
 
 ## Project 4: DNA-Based Logic Gates
 
-In my research as an undergraduate, I studied the construction of and uses cases for DNA-based logic gates. These gates operate in the same way as traditional logic gates: producing an output signal, given an input. The flow of a simple gate is pictured below, where A and A* are complimentary strands of DNA.
+In my research as an undergraduate, I studied the construction of and uses cases for DNA-based logic gates. These gates rely on the predictable base-pairing of DNA to operate (A-T, C-G) and emulate the behavior of traditional logic gates: producing an output signal, given an input. The flow of a simple gate is pictured below, where A and A* are complimentary strands of DNA. The gate wants to reach an equilibrium state in which all strands are perfectly paired with their match (ex. t-A is paired with t*-A*), and to reach this state, some displacement occurs.
 
 
 <p align="center"> 
 <img src="/assets/dna_gate2.png">
 </p>
 
+The output strand typically has a fluorescent tag on it that can be measured once the strand is released (the signal is suppressed when the output strand is in a double-stranded configuration). Building off of this structure, pairs of gates can be used together to create AND and OR logic gates. These gates have the potential to be used in transistors or even in medicine that can target cells by their DNA/RNA markers.
+
+---
+
 ## Project 5: DNA-Mediated Lithography
 
 I recorded a [short, Vimeo video](https://vimeo.com/112122612) on lithography done in part by DNA-mediated etching of SiO2.
 
+---
+
+If you are interested in my work and thoughts, check out my [Twitter](https://twitter.com/cezannecam) or connect with me on [LinkedIn](https://www.linkedin.com/in/cezanne-camacho-422823b2/).
 
 
