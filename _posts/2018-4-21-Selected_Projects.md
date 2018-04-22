@@ -64,5 +64,18 @@ This project uses pairs of photos taken by an endoscope at slightly different de
 SIFT was used to create feature descriptors for two endoscopic images, taken at different depths. Using the SIFT descriptors, we identified the best-matching points in the pair of images and used those to calculate a transformation between the two images. From this transformation we extracted an estimation for the distance between the end of the endoscope and the objects in the images.
 
 
+## Project 4: DNA-Based Logic Gates
+
+In my research as an undergraduate, I studied the construction of and uses cases for DNA-based logic gates. These gates operate in the same way as traditional logic gates: producing an output signal, given an input. The flow of a simple gate is pictured below, where A and A* are complimentary strands of DNA.
+
+
+<p align="center"> 
+<img src="/assets/dna_gate.png">
+</p>
+
+## Project 5: DNA-Mediated Lithography
+
+I recorded a [short, Vimeo video](https://vimeo.com/112122612) on lithography done in part by DNA-mediated etching of SiO2.
+
 
 
