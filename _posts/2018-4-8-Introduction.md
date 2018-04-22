@@ -5,7 +5,6 @@ title: First post
 
 I spend a lot of my time learning and creating, and I'm trying to be better about documenting the process.
 I can also take advantage of the internet's ability to remember *forever* and can store some memories here, to access later.
-
 This post will be a summary of some projects I worked on with colleagues while I was in school and when I first began to teach.
 
 **Project 1: Activity Recognition**
