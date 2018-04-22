@@ -38,3 +38,16 @@ and it models the difference between the three classes.
 
 We did get the best performance using supervised algorithms, but this project did get me thinking about  
 how unsupervised approaches might be improved.
+
+
+### Project 2: Cell Detection
+
+This project uses supervised learning algorithms and graph-mining techniques to automatically count and detect embryonic cells as they grow.
+
+Cell detection and counting in the context of biology research is largely a labor-intensive, manual task. A reliable count is of paramount importance as it is often a fundamental step in various growth studies; most commonly in embryonic or cancer cell growth analysis. In this project, we studied the efficacy of SVM and graph-mining algorithms to automatically detect and count embryonic stem cells in fluorescent microscopy images. You can read about the detailed results, [in this paper]({{ site.url }}/assets/embryonic_stem_cells.pdf).
+
+<p align="center"> 
+<img src="/assets/cell_detection_svm.png">
+</p>
+
+The graph-mining approach was very interesting in that it relied on constructing a graph that separated individual cells based on patterns of intensity in a given image. A cell nucleus was very bright, but its edges were darker, and by identifying areas of brightness, and after eliminating spurious connections between cells and trying to account for overlap, graph-mining worked well.
