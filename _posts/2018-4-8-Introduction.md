@@ -4,8 +4,7 @@ title: First post
 ---
 
 I spend a lot of my time learning and creating, and I'm trying to be better about documenting the process.
-I can also take advantage of the internet's ability to remember *forever* and can store some memories here, to access later.
-This post will be a summary of some projects I worked on with colleagues while I was in school and when I first began to teach.
+To that end, this post will be a summary of some projects I worked on with colleagues while I was in school and when I first began to teach.
 
 **Project 1: Activity Recognition**
 
@@ -24,7 +23,7 @@ To approach this challenge, we compared unsupervised learning algorithms with su
 The thinking was: a supervised algorithm might be the most accurate, but a good, unsupervised algorithm 
 would be ideal, since it takes a while to create richly-labeled data for training.
 
-![LDA 3 class recognition]({{ site.baseurl }}/assets/activity_rec.png =250x400)
+<img src='assets/activity_rec.png' alt="LDA 3 class recognition" width=50% />
 
 In the image above, you can see an example of data separation done with linear discriminant analysis (LDA).
 LDA reduces the feature dimension; the features are the different types of collected sensor data 
