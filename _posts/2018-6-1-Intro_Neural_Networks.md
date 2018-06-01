@@ -4,12 +4,10 @@ title: Introduction to Neural Networks
 ---
 
 How and why do neural networks work?
-
 The first in a series about understanding how neural networks learn to separate and classify visual data. 
-
 <p align="center">
-<video controls="controls" width="400" height="300" 
-name="Video Name" src="/assets/intro_nn/neuron.mov"></video>
+<video controls="controls" width="500" height="300" 
+name="Video Name" src="/assets/intro_nn/neuron_inout.mov"></video>
 </p>
 
 <!--more-->
