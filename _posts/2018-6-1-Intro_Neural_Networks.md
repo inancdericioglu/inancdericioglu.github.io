@@ -96,7 +96,7 @@ These thresholds make up a complete neural network. For every  input color, we b
 
 I’m skipping over one detail here, which is that this input color will be seen as a series of numerical values by a computer. Most images are color images also called RGB images, with red, green, and blue color components. Any color will typically be a list of three values: one for a red value, one for green, and one for blue. So, the nodes that check for red and blue color components will be looking at those three RGB numerical values; each node will apply a function to those values that converts them into red and blue strength values.
 
-** Activation Function**
+**Activation Function**
 
 Neural networks really only work with numerical data and so this no or yes output will be a numerical value: 1 for yes or 0 for no. We can even represent a “maybe” with a value in between 0 and 1. To get a value between 0 and 1, we apply something called an **activation function**, which is a function that processes the output of a neuron and scales it from 0-1. In general these scaled values are a really good and consistent way to measure the strength of any input or output signal and this consistency becomes really helpful when a neural network trains.
 
@@ -123,7 +123,7 @@ So, for a red color input, let’s go through what this network does. The networ
 name="Video Name" src="/assets/intro_nn/process_red.mov"></video>
 </p>
 
-** Class Scores**
+**Class Scores**
 
 These outputs are often called confidence scores or **class scores**. And you can think of them as probability values where a value of 1 corresponds to a 100% chance of being the correct class and a 0.5 would be a 50% chance of being correct. The higher the score, the more likely a color falls into that class.
 
