@@ -65,7 +65,7 @@ I’m going to start by looking at a smaller set of colors, as an example, red, 
 We know that purple is a combination of red and blue and so, I can plot each of these colors on an axis that has red on one axis and blue on the other. A purely red color will fall on the red axis, and purely blue will fall only on the blue axis.
 
 <p align="center">  
-<img src="/assets/intro_nn/red_blue_axis.png" alt="Red and blue color plot."  width="300" >
+<img src="/assets/intro_nn/red_blue_axis.png" alt="Red and blue color plot."  width="200" >
 </p>
 
 Any color that falls somewhere on this graph has some red component and some blue component, and we can classify any new color that we see by looking at our discrete class options and seeing which of those options best describes that new color.
@@ -85,13 +85,13 @@ What I’ve done here is to define threshold lines that look at the levels of re
 Keeping these 0.5 strength thresholds in mind, we can write these class-defining thresholds down and make a complete classification model for these colors! Notice that each of the three color classes is defined by only two colors: red and blue, and these are the smaller set of features that make up our color classification model.
 
 <p align="center">  
-<img src="/assets/intro_nn/red_blue_threshold_list.png" alt="Red, blue, and purple defining thresholds."  width="700" height="300" >
+<img src="/assets/intro_nn/red_blue_threshold_list.png" alt="Red, blue, and purple defining thresholds."  width="600" >
 </p>
 
 These thresholds make up a complete neural network. For every  input color, we break it into its features: red and blue. Then perform a threshold check: is the red component stronger than 0.5? What about the blue component? For an input color, these threshold nodes have an output: no if a color does not pass or yes, if it does.
 
 <p align="center">  
-<img src="/assets/intro_nn/nn_first_layer.png" alt="First layers of the color classification network."  width="400" >
+<img src="/assets/intro_nn/nn_first_layer.png" alt="First layers of the color classification network."  width="300" >
 </p>
 
 I’m skipping over one detail here, which is that this input color will be seen as a series of numerical values by a computer. Most images are color images also called RGB images, with red, green, and blue color components. Any color will typically be a list of three values: one for a red value, one for green, and one for blue. So, the nodes that check for red and blue color components will be looking at those three RGB numerical values; each node will apply a function to those values that converts them into red and blue strength values.
@@ -101,13 +101,18 @@ I’m skipping over one detail here, which is that this input color will be seen
 Neural networks really only work with numerical data and so this no or yes output will be a numerical value: 1 for yes or 0 for no. We can even represent a “maybe” with a value in between 0 and 1. To get a value between 0 and 1, we apply something called an **activation function**, which is a function that processes the output of a neuron and scales it from 0-1. In general these scaled values are a really good and consistent way to measure the strength of any input or output signal and this consistency becomes really helpful when a neural network trains.
 
 <p align="center">  
-<img src="/assets/intro_nn/nn_activation.png" alt="Activation function applied to the output of each node."  width="400" >
+<img src="/assets/intro_nn/nn_activation.png" alt="Activation function applied to the output of each node."  width="300" >
 </p>
 
-The complete network looks like the following image.
+The complete network has this structure:
+
 > 1. An input layer that looks at the input color.
 > 2. A hidden layer, which can be thought of as a feature extractor that looks at our red and blue features.
 > 3. A fully-connected layer, which has as many nodes as there are color classes.
+
+<p align="center">  
+<img src="/assets/intro_nn/complete_nn" alt="Complete neural network."  width="500" >
+</p>
 
 Each node in the fully-connected layer is connected to the output of every previous node, in this case, the outputs from the red and blue threshold nodes.
 
@@ -115,7 +120,7 @@ So, for a red color input, let’s go through what this network does. The networ
 
 <p align="center">
 <video controls="controls" width="500" height="300" 
-name="Video Name" src="/assets/intro_nn/nn_red_process.mov"></video>
+name="Video Name" src="/assets/intro_nn/process_red.mov"></video>
 </p>
 
 ** Class Scores**
@@ -126,7 +131,7 @@ This network should be able to handle new colors, those that have some blue and 
 
 <p align="center">
 <video controls="controls" width="500" height="300" 
-name="Video Name" src="/assets/intro_nn/new_color_process.mov"></video>
+name="Video Name" src="/assets/intro_nn/process_new_color.mov"></video>
 </p>
 
 You might be wondering why I chose these colors, and it’s because this simple example can extend to all the colors in our initial rainbow! To account for some of the warmer colors, we have to add one more feature to our model: yellow. Now, all the colors in this rainbow can be represented by combination of red, yellow, and blue strengths.
