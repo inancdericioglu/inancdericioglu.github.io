@@ -158,7 +158,7 @@ This extra color feature will add a dimension in how we have to separate this da
 
 Neural networks break up any set of training data into a smaller, simpler model that is made of features. In our rainbow example, all our features were colors. Then a network can learn how to combine those features and create thresholds/boundaries that can separate and classify any kind of data. Realistically, data is often a lot more complex than rainbow color data, but neural networks just layer separation on top of separation layer to create more complex boundaries and group all kinds of data.  
 
-If you understand that a model is made of visual features found in training data and that a neural network combines these features, using a series of thresholds to identify any new data, **then you understand how neural networks work!**
+If you understand that a model is made of visual features found in training data and that a neural network combines these features, using a series of thresholds, to identify any new data, **then you understand how neural networks work!**
 
 
 
