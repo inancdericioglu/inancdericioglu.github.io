@@ -54,7 +54,7 @@ Let’s see how creating a model works by building one ourselves and creating a 
 <img src="/assets/intro_nn/rainbow_classes.png" alt="Rainbow colors." width="500" >
 </p>
 
-Say, we are given the rainbow above as training data and this corresponding, discrete list of color classes. We want to create a model that will correctlty classify all of these given colors *and* which will be able to classify any new colors that we may see into one of these classes.
+Say, we are given the rainbow above as training data and this corresponding, discrete list of color classes. We want to create a model that will correctly classify all of these given colors *and* which will be able to classify any new colors that we may see into one of these classes.
 
 I’m going to start by looking at a smaller set of colors, as an example, red, blue, and purple.
 
@@ -80,7 +80,7 @@ Each new color that we see, should fall into one of our three color classes. In 
 <img src="/assets/intro_nn/strength_threshold.png" alt="Red and blue threshold lines."  width="500" >
 </p>
 
-What I’ve done here is to define threshold lines that look at the levels of red and blue in a color and then, for any given color, I classify it into one of three color classes based on where it falls on either side of these lines! So, the pinkish color that you saw earlier, would fall into the red classification area. One thing to note is that I’ve chosen these threshold lines based on what looks reasonable to my eye, but the job of a neural network is to *learn* the best threshold lines; maybe a network would learn that red can be captured by a lower threshold.
+What I’ve done here is to define threshold lines that look at the levels of red and blue in a color and then, for any given color, I classify it into one of three color classes based on where it falls on either side of these lines! So, the pink color that you saw earlier, would fall into the red classification area. One thing to note is that I’ve chosen these threshold lines based on what looks reasonable to my eye, but the job of a neural network is to *learn* the best threshold lines; maybe a network would learn that red can be captured by a lower threshold.
 
 Keeping these 0.5 strength thresholds in mind, we can write these class-defining thresholds down and make a complete classification model for these colors! Notice that each of the three color classes is defined by only two colors: red and blue, and these are the smaller set of features that make up our color classification model.
 
