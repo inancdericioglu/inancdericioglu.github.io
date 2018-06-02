@@ -20,7 +20,7 @@ name="Video Name" src="/assets/intro_nn/neuron_inout.mov"></video>
 Neural networks are made up of neurons, sometime called nodes. One neuron is responsible for processing some input data and producing an output. This is modeled after the neurons in our brain, which process input signals and produce output signals. For a neural network that processes visual data, such as a set of images, these inputs will be either spatial information or color information. When these color components or shapes are combined, which happens inside a neuron in the form of an equation (ex. 0.5\*red and 0.5\*blue = 1\*purple), it produces an output signal that can do something like help classify the initial input!
 
 <p align="center"> 
-<img src="/assets/intro_nn/simple_nodes.png" alt="Images of shapes and colors that make up a handwritten 6 and the color purple, respectively." width="500" height="300" >
+<img src="/assets/intro_nn/simple_nodes.png" alt="Images of shapes and colors that make up a handwritten 6 and the color purple, respectively." width="500" >
 </p>
 
 By looking at many many combinations of both shapes and colors, a neural network can recognize more and more complex patterns in images. You'll often see neural networks represented by figures like these:
@@ -51,7 +51,7 @@ The idea is that *if* a set of image data can be broken down into a finite set o
 Let’s see how creating a model works by building one ourselves and creating a model for color classification.
 
 <p align="center"> 
-<img src="/assets/intro_nn/rainbow_classes.png" alt="Rainbow colors." width="500" height="300" >
+<img src="/assets/intro_nn/rainbow_classes.png" alt="Rainbow colors." width="500" >
 </p>
 
 Say, we are given the rainbow above as training data and this corresponding, discrete list of color classes. We want to create a model that will correctlty classify all of these given colors *and* which will be able to classify any new colors that we may see into one of these classes.
@@ -59,25 +59,25 @@ Say, we are given the rainbow above as training data and this corresponding, dis
 I’m going to start by looking at a smaller set of colors, as an example, red, blue, and purple.
 
 <p align="center">  
-<img src="/assets/intro_nn/red_blue.png" alt="Red, blue, and purple."  width="500" height="200" >
+<img src="/assets/intro_nn/red_blue.png" alt="Red, blue, and purple."  width="500" >
 </p>
 
 We know that purple is a combination of red and blue and so, I can plot each of these colors on an axis that has red on one axis and blue on the other. A purely red color will fall on the red axis, and purely blue will fall only on the blue axis.
 
 <p align="center">  
-<img src="/assets/intro_nn/red_blue_axis.png" alt="Red and blue color plot."  width="300" height="200" >
+<img src="/assets/intro_nn/red_blue_axis.png" alt="Red and blue color plot."  width="300" >
 </p>
 
 Any color that falls somewhere on this graph has some red component and some blue component, and we can classify any new color that we see by looking at our discrete class options and seeing which of those options best describes that new color.
 
 <p align="center"> 
-<img src="/assets/intro_nn/new_color.png" alt="Classifying a new color as red."  width="600" height="200" >
+<img src="/assets/intro_nn/new_color.png" alt="Classifying a new color as red."  width="500"  >
 </p>
 
 Each new color that we see, should fall into one of our three color classes. In sorting the above pink-ish color into the red class, I’ve implied that I have some idea of what qualities separate the three color classes. In my head, I've actually constructed some thresholds. In the image below, the red and blue axes represent a measure of color strength; how strong the red and blue components of a color are. Strength is a numerical value with a range from 0-1, where 0 is the lowest and 1 is the highest saturation of a color. The thresholds I’ve thought of are at the half-strength mark. For example, any color with more that 0.5 strength for red and *less* than 0.5 strength for blue is going to be classified as red.
 
 <p align="center">  
-<img src="/assets/intro_nn/strength_threshold.png" alt="Red and blue threshold lines."  width="600" height="200" >
+<img src="/assets/intro_nn/strength_threshold.png" alt="Red and blue threshold lines."  width="500" >
 </p>
 
 What I’ve done here is to define threshold lines that look at the levels of red and blue in a color and then, for any given color, I classify it into one of three color classes based on where it falls on either side of these lines! So, the pinkish color that you saw earlier, would fall into the red classification area. One thing to note is that I’ve chosen these threshold lines based on what looks reasonable to my eye, but the job of a neural network is to *learn* the best threshold lines; maybe a network would learn that red can be captured by a lower threshold.
@@ -91,7 +91,7 @@ Keeping these 0.5 strength thresholds in mind, we can write these class-defining
 These thresholds make up a complete neural network. For every  input color, we break it into its features: red and blue. Then perform a threshold check: is the red component stronger than 0.5? What about the blue component? For an input color, these threshold nodes have an output: no if a color does not pass or yes, if it does.
 
 <p align="center">  
-<img src="/assets/intro_nn/nn_first_layer.png" alt="First layers of the color classification network."  width="500" height="300" >
+<img src="/assets/intro_nn/nn_first_layer.png" alt="First layers of the color classification network."  width="400" >
 </p>
 
 I’m skipping over one detail here, which is that this input color will be seen as a series of numerical values by a computer. Most images are color images also called RGB images, with red, green, and blue color components. Any color will typically be a list of three values: one for a red value, one for green, and one for blue. So, the nodes that check for red and blue color components will be looking at those three RGB numerical values; each node will apply a function to those values that converts them into red and blue strength values.
@@ -101,7 +101,7 @@ I’m skipping over one detail here, which is that this input color will be seen
 Neural networks really only work with numerical data and so this no or yes output will be a numerical value: 1 for yes or 0 for no. We can even represent a “maybe” with a value in between 0 and 1. To get a value between 0 and 1, we apply something called an **activation function**, which is a function that processes the output of a neuron and scales it from 0-1. In general these scaled values are a really good and consistent way to measure the strength of any input or output signal and this consistency becomes really helpful when a neural network trains.
 
 <p align="center">  
-<img src="/assets/intro_nn/nn_activation.png" alt="Activation function applied to the output of each node."  width="500" height="300" >
+<img src="/assets/intro_nn/nn_activation.png" alt="Activation function applied to the output of each node."  width="400" >
 </p>
 
 The complete network looks like the following image.
@@ -132,13 +132,13 @@ name="Video Name" src="/assets/intro_nn/new_color_process.mov"></video>
 You might be wondering why I chose these colors, and it’s because this simple example can extend to all the colors in our initial rainbow! To account for some of the warmer colors, we have to add one more feature to our model: yellow. Now, all the colors in this rainbow can be represented by combination of red, yellow, and blue strengths.
 
 <p align="center">  
-<img src="/assets/intro_nn/rainbow_thresholds.png" alt="Thresholds and features for all the rainbow colors."  width="600" height="300" >
+<img src="/assets/intro_nn/rainbow_thresholds.png" alt="Thresholds and features for all the rainbow colors."  width="600" >
 </p>
 
 This extra color feature will add a dimension in how we have to separate this data. Instead of a threshold line, we’ll actually end up with threshold planes that separate one color class from another. 
 
 <p align="center">  
-<img src="/assets/intro_nn/3_color_separation.png" alt="Thresholds and features for all the rainbow colors."  width="400" height="300" >
+<img src="/assets/intro_nn/3_color_separation.png" alt="Thresholds and features for all the rainbow colors."  width="400" >
 </p>
 
 ---
