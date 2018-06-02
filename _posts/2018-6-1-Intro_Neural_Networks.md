@@ -41,7 +41,7 @@ Now, why exactly do neural networks work? This wasn’t exactly clear to me when
 > 1. Any set of data, such as a set of images, can be represented by a smaller, simpler **model**.
 > 2. A model is made of a combination of visual **features**: a few colors and/or shapes.
 
-The idea is that *if* a set of image data can be broken down into a finite set of shape and color features, then we can learn how to group and classify any image based on which of these features it contains! The big assumption here is that any set of data can be represented by a smaller model. This is true of any set of data with one exception. The only case where a set of data cannot be broken down in to a simpler mode is in the case of random data; for any other kind of data there will be some pattern that can be detected.
+The idea is that *if* a set of image data can be broken down into a finite set of shape and color features, then we can learn how to group and classify any image based on which of these features it contains. The big assumption here is that any set of data can be represented by a smaller model. This is true of any set of data with one exception. The only case where a set of data cannot be broken down in to a simpler mode is in the case of random data; for any other kind of data there will be some pattern that can be detected.
 
 
 ---
@@ -78,13 +78,15 @@ In sorting the above pink-ish color into the red class, I’ve implied that I ha
 
 ### Thresholds and Separating Data
 
+What I’ve done here is to define threshold lines that look at the levels of red and blue in a color and then, for any given color, I classify it into one of three color classes based on where it falls on either side of these lines. So, the pink color that you saw earlier, would fall into the red classification area.
+
 <p align="center">  
 <img src="/assets/intro_nn/strength_threshold.png" alt="Red and blue threshold lines."  width="500" >
 </p>
 
-What I’ve done here is to define threshold lines that look at the levels of red and blue in a color and then, for any given color, I classify it into one of three color classes based on where it falls on either side of these lines! So, the pink color that you saw earlier, would fall into the red classification area. One thing to note is that I’ve chosen these threshold lines based on what looks reasonable to my eye, but the job of a neural network is to *learn* the best threshold lines; maybe a network would learn that red can be captured by a lower threshold.
+One thing to note is that I’ve chosen these threshold lines based on what looks reasonable to my eye, but the job of a neural network is to *learn* the best threshold lines; maybe a network would learn that red can be captured by a lower threshold.
 
-Keeping these 0.5 strength thresholds in mind, we can write these class-defining thresholds down and make a complete classification model for these colors! Notice that each of the three color classes is defined by only two colors: red and blue, and these are the smaller set of features that make up our color classification model.
+Keeping these 0.5 strength thresholds in mind, we can write these class-defining thresholds down and make a complete classification model for these colors. Notice that each of the three color classes is defined by only two colors: red and blue, and these are the smaller set of features that make up our color classification model.
 
 <p align="center">  
 <img src="/assets/intro_nn/red_blue_threshold_list.png" alt="Red, blue, and purple defining thresholds."  width="600" >
