@@ -111,7 +111,7 @@ The complete network has this structure:
 > 3. A fully-connected layer, which has as many nodes as there are color classes.
 
 <p align="center">  
-<img src="/assets/intro_nn/complete_nn" alt="Complete neural network."  width="500" >
+<img src="/assets/intro_nn/complete_nn.png" alt="Complete neural network."  width="500" >
 </p>
 
 Each node in the fully-connected layer is connected to the output of every previous node, in this case, the outputs from the red and blue threshold nodes.
@@ -152,7 +152,7 @@ This extra color feature will add a dimension in how we have to separate this da
 
 Neural networks break up any set of training data into a smaller, simpler model that is made of features. In our rainbow example, all our features were colors. Then a network can learn how to combine those features and create thresholds/boundaries that can separate and classify any kind of data. Realistically, data is often a lot more complex than rainbow color data, but neural networks just layer separation on top of separation layer to create more complex boundaries and group all kinds of data.  
 
-If you understand how a model that extracts visual features, like specific colors, from some training data and then combines them using thresholds to identify any new data, then you understand how neural networks work!
+**If you understand how a model that extracts visual features, like specific colors, from some training data and then combines them using thresholds to identify any new data, then you understand how neural networks work!**
 
 
 
