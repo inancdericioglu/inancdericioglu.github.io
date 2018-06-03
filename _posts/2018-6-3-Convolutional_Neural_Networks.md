@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Convolutional Neural Networks & Image Classification
+title: Convolutional Neural Networks
 ---
 
 Image classification is a challenging task for computers. Convolutional neural networks represent one data-driven approach to this challenge. This post will be about image representation and the layers that make up a convolutional neural network. The second in a series about understanding how neural networks learn to separate and classify visual data. 
@@ -39,10 +39,10 @@ It's simple for us to look at this image and identify the car, but when we give 
 An image is seen by a neural network (and by computers) as a grid of numerical values. Below, you'll see a zoomed in portion of a grayscale image of a car. The image is broken up into a fine grid, and each of the grid cells is called a pixel. For grayscale images, each pixel has a value between 0 and 255, where 0 is black and 255 is white; shades of gray are anywhere in between.
 
 <p align="center">  
-<img src="/assets/cnn_intro/grayscale_image.png" alt="Grayscale pixel values 0-255."  width="500" >
+<img src="/assets/cnn_intro/grayscale_image.png" alt="Grayscale pixel values 0-255."  width="400" >
 </p>
 
-For a standard color image, there are red, green, and blue pixel values for each (x,y) pixel location. We can think of this as a stack of three images, one for each of the red, green, and blue color components. You may see a color pixel value written as a list of three numerical values. For example, for an RGB pixel value,  `[255, 0, 0]` is pure red and `[200, 0, 200]` is purple. In this way, we can think of any image as a 3D volume with some width, height, *and* color depth. Grayscale images have a color depth of 1.
+For a standard color image, there are red, green, and blue pixel values for each (x,y) pixel location. We can think of this as a stack of three images, one for each of the red, green, and blue color components. You may see a color pixel value written as a list of three numerical values. For example, for an RGB pixel value,  `[255,0,0]` is pure red and `[200,0,200]` is purple. In this way, we can think of any image as a 3D volume with some width, height, *and* color depth. Grayscale images have a color depth of 1.
 
 <p align="center">  
 <img src="/assets/cnn_intro/color_image.png" alt="Color image in x-y space, with a depth of 3 for 3 RGB color channels."  width="600" >
@@ -51,7 +51,7 @@ For a standard color image, there are red, green, and blue pixel values for each
 To creat an image classifier, we need an algorithm that can look at these pixel values and classify this image as a car. We also want a classifier to be able to detect this car under varying ight conditions (at night or during a sunny day), and we want the classifier to generalize well, so that it can recognize a variety of cars in different environments and in different poses.
 
 <p align="center">  
-<img src="/assets/cnn_intro/var_cars.png" alt="Variety of images of a car in different scenarios."  width="500" >
+<img src="/assets/cnn_intro/var_cars.png" alt="Variety of images of a car in different scenarios."  width="600" >
 </p>
 
 If you look at just a small sample of car images, you can see that the pixel values are *really* different for each of these images. So, the challenge becomes: how can we create a classifier that, for any of these grids of pixel values, will be able to classify each one of them as a car.
@@ -65,7 +65,7 @@ Since there is no clear way to create a set of rules about pixel values that mak
 
 
 <p align="center">  
-<img src="/assets/cnn_intro/training_data.png" alt="True and predicted class labels for a car image."  width="500" >
+<img src="/assets/cnn_intro/training_data.png" alt="True and predicted class labels for a car image."  width="600" >
 </p>
 
 In this example, we'll plan to train a convolutional neural network. As this network trains, it should learn what parts of a car are important to recognize, such as wheels and windows, and it should be general enough to recognize cars in a variety of positions and environments.
@@ -105,14 +105,14 @@ Let’s take a closer look at one type of convolutional kernel: a high-pass imag
 <img src="/assets/cnn_intro/filtered_ex.png" alt="Filtered image of a car." width="500" >
 </p>
 
-For example, if we put an image of a car through a high-pass filter, we expect the edges of the car, where the pixel values change abruptly from light to dark, to be detected. The edges of objects are often areas of aburpt intensity change and, for this reason, high-pass filters are sometimes called "edge detection filters."
+For example, if we put an image of a car through a high-pass filter, we expect the edges of the car, where the pixel values change abruptly from light to dark, to be detected. The edges of objects are often areas of abrupt intensity change and, for this reason, high-pass filters are sometimes called "edge detection filters."
 
 #### Convolution Kernels
 
 The filters I’ll be talking about are in the form of matrices, often called convolution kernels, which are just grids of numbers that modify an image. Below is an example of high-pass filter, a 3x3 kernel that does edge detection.
 
 <p align="center">
-<img src="/assets/cnn_intro/edge_detection_filter.png" alt="3x3 edge detection filter with row values [0,-1,0], [-1, 4, -1], [0, -1, 0]." width="300" >
+<img src="/assets/cnn_intro/edge_detection_filter.png" alt="3x3 edge detection filter with row values [0,-1,0], [-1,4,-1], [0,-1,0]." width="200" >
 </p>
 
 You may notice that all the elements in this 3x3 grid sum to zero. For an edge detection filter, it’s important that all of it's' elements sum to zero because it's computing the difference or change between neighboring pixels. If these pixel weights did not add up to zero, then the calculated difference would be either positively or negatively weighted, which has the effect of brightening or darkening the entire filtered image, respectively.
@@ -130,18 +130,18 @@ I’ll walk through a specific example, using the 3x3 edge detection filter.
  To better see the pixel-level operations, I’ll zoom in on the image of the car. 
 
 <p align="center">
-<img src="/assets/cnn_intro/zoomed_corner.png" alt="Zoomed in pixel area near the top-right edge of the car." width="400" >
+<img src="/assets/cnn_intro/zoomed_corner.png" alt="Zoomed in pixel area near the top-right edge of the car." width="600" >
 </p>
 
 For every pixel in this grayscale image, we place our kernel over it, so that the selected pixel is at the center of the kernel, and perform convolution. In the below image, I'm selecting a center pixel with a value of 200, as an example.
 
 <p align="center">
-<img src="/assets/cnn_intro/pixel_selection.png" alt="Kernel overlayed on a 3x3 pixel area." width="500" >
+<img src="/assets/cnn_intro/pixel_selection.png" alt="Kernel overlaid on a 3x3 pixel area." width="500" >
 </p>
 
 The steps for a complete convolution are as follows:
->1. Multiply the values in the kernel with their matching pixel value. So, value in the top left of the 3x3 kernel (0), will be multiplied by the pixel value in that *same* corner in our image area (150).
->2. Sum all these multiplied pairs of values to get a new value, in this case, 175. This value will be the new pixel value in the filtered output image, at the same (x,y) location as the selected center pixel.
+1. Multiply the values in the kernel with their matching pixel value. So, value in the top left of the 3x3 kernel (0), will be multiplied by the pixel value in that *same* corner in our image area (150).
+2. Sum all these multiplied pairs of values to get a new value, in this case, 175. This value will be the new pixel value in the filtered output image, at the same (x,y) location as the selected center pixel.
 
 <p align="center">
 <video controls="controls" width="500" height="300" 
@@ -155,14 +155,14 @@ This process repeats for every pixel in the input image, until we are left with 
 Before we move on, I want to add a bit of terminology. The values inside a kernel, which are multiplied by their corresponding pixel value, are called **weights**. This is because they determine how important (or how weighty) a pixel is in forming a new, output image. You’ll notice that the center pixel has a weight of 4, which means it is heavily, positively weighted. Out of all the pixels in a 3x3 patch, the center pixel will be the most important in determining the value of the pixel in the output, filtered image.
 
 <p align="center">
-<img src="/assets/cnn_intro/weights.png" alt="3x3 kernel weight values are highlighted." width="300" >
+<img src="/assets/cnn_intro/weights.png" alt="3x3 kernel weight values are highlighted." width="500" >
 </p>
 
 The kernel also contains negative weights with a value of -1. These correspond to the pixels that are directly above and below, and to the left and right, of the center pixel. These pixels are closest to the center pixel and, because they are symmetrically distributed around the center, we can say that this kernel will detect any change in intensity around a center pixel on its left and right sides *and* on its top and bottom sides.
 
 #### Image Borders
 
-The only pixels for which convolution doesn't work are the pixels at the borders of an image. A 3x3 kernel cannot be perfectly placed over a center pixel at the edges or corners of an image. In practice, there are a few of ways of dealing with this, the most common ways are to either pad this image with a border of 0’s (or another grayscakle value) so that we can perfectly overlay a kernel on all the pixel values in the original image, or to ignore the pixel values at the borders of the image, and only look at pixels where we can completely overlay the 3x3 convolutional kernel.
+The only pixels for which convolution doesn't work are the pixels at the borders of an image. A 3x3 kernel cannot be perfectly placed over a center pixel at the edges or corners of an image. In practice, there are a few of ways of dealing with this, the most common ways are to either pad this image with a border of 0’s (or another grayscale value) so that we can perfectly overlay a kernel on all the pixel values in the original image, or to ignore the pixel values at the borders of the image, and only look at pixels where we can completely overlay the 3x3 convolutional kernel.
 
 <p align="center">
 <video controls="controls" width="500" height="300" 
@@ -194,10 +194,9 @@ A pooling layer will also look at the pixel values in an image, so I'll focus on
 <img src="/assets/cnn_intro/patches.png" alt="2x2 pixel patches." width="300" >
 </p>
 
-Let’s zoom in even further on four of these patches. A maxpooling layer is defined by the patch size, 2x2, and a stride. The patch can be thought of as a 2x2 window that the maxppoling layer looks at to select a maximum pixel value. It then moves this window by some stride across and down the image. For a patch of size 2x2 and a stride of 2, this window will perfectly cover the image. A smaller stride would see some overlap in patches and a larger stride would miss some pixels entirely. So, we usually see a patch size and a stride size that are the same.
+Let’s zoom in even further on four of these patches. A maxpooling layer is defined by the patch size, 2x2, and a stride. The patch can be thought of as a 2x2 window that the maxpooling layer looks at to select a maximum pixel value. It then moves this window by some stride across and down the image. For a patch of size 2x2 and a stride of 2, this window will perfectly cover the image. A smaller stride would see some overlap in patches and a larger stride would miss some pixels entirely. So, we usually see a patch size and a stride size that are the same.
 
 
-\n
 
 <p align="center">
 <video controls="controls" width="400" height="200" 
@@ -207,7 +206,7 @@ name="Video Name" src="/assets/cnn_intro/stride.mov"></video>
 For each 2x2 patch, a maxpooling layer looks at each value in a patch and selects only the maximum value. In the red patch it selects 140, in the yellow, 90, and so on, until we are left with four values from the four patches.
 
 <p align="center">
-<img src="/assets/cnn_intro/maxpool.png" alt="2x2 pixel patches." width="300" >
+<img src="/assets/cnn_intro/maxpool.png" alt="2x2 pixel patches." width="500" >
 </p>
 
 Now, you might be wondering why we would use a maxpooling layer in the first place. This layer is discarding pixel information. We use a maxpooling layer for a couple of reasons. First, dimensionality reduction;  As an input image moves forward through a CNN, we are taking a fairly flat image in x-y space and expanding its depth dimension while decreasing its height and width. The network distills information about the content of an image and squishes it into a representation that will make up a reasonable number of inputs that can be seen by a fully-connected layer. Second, maxpooling makes a network resistant to small pixel value changes in an input image. Imagine that some of the pixel values in a small patch are a little bit brighter or darker. Even if a patch has some slightly different pixel values, the maximum value, if it is a large enough maximum, should be the same.
@@ -218,6 +217,10 @@ Now, you might be wondering why we would use a maxpooling layer in the first pla
 ## PyTorch Code Examples
 
 If you'd like to see how to create these kinds of CNN layers using PyTorch code, I have a [public, tutorial repository](https://github.com/cezannec/intro-computervision). There are instructions for setting up a local environment and running this code, or you can just look at the code and its output. The layers in this post correspond to the first notebook: **1. Convolutional NN Layers, Visualization**.
+
+<p align="center">
+<img src="/assets/cnn_intro/maxpool.png" alt="Output of all CNN layers executed in PyTorch code." width="600" >
+</p>
 
 Note that, in the first notebook, I've initialized and explicitly defined the weights of the convolutional layer. However, when we get to training a neural network on image data, the network will have to *learn* the best weights for convolutional kernels that extract features from an input image. These learned features will be used to separate different classes of data.
 
