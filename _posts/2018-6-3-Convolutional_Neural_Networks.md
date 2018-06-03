@@ -123,7 +123,7 @@ To apply this filter to an image, an input image, F(x,y), is convolved with the 
 
 <p align="center">
 <video controls="controls" width="500" height="300" 
-name="Video Name" src="/assets/cnn_intro/filter_animation.mov"></video>
+name="Video Name" src="/assets/cnn_intro/filter_inaction.mov"></video>
 </p>
 
 I’ll walk through a specific example, using the 3x3 edge detection filter.
