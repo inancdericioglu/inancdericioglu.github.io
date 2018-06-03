@@ -3,7 +3,7 @@ layout: post
 title: Convolutional Neural Networks
 ---
 
-Image classification is a challenging task for computers. Convolutional neural networks represent one data-driven approach to this challenge. This post will be about image representation and the layers that make up a convolutional neural network. The second in a series about understanding how neural networks learn to separate and classify visual data. 
+Image classification is a challenging task for computers. Convolutional neural networks represent one data-driven approach to this challenge. This post will be about image representation and the layers that make up a convolutional neural network. 
 <p align="center">
 <img src="/assets/cnn_intro/CNN_ex.png" alt="A CNN that sees an image of a car and outputs a class." width="600" >
 </p>
@@ -15,7 +15,7 @@ Image classification is a challenging task for computers. Convolutional neural n
 
 ## Neural Network Structure
 
-In the last post, I went over why neural networks work: they rely on the fact that most data can be represented by a smaller, simpler set of features. Neural networks are made of many nodes that learn how to best separate training data into classes, or other specified groups, and many layers of nodes can create more and more complex boundaries for separating and grouping this data.
+This post is the second in a series about understanding how neural networks learn to separate and classify visual data. In the last post, I went over why neural networks work: they rely on the fact that most data can be represented by a smaller, simpler set of features. Neural networks are made of many nodes that learn how to best separate training data into classes, or other specified groups, and many layers of nodes can create more and more complex boundaries for separating and grouping this data.
 
 <p align="center">  
 <img src="/assets/intro_nn/complete_nn.png" alt="Complete neural network."  width="500" >
@@ -219,7 +219,7 @@ Now, you might be wondering why we would use a maxpooling layer in the first pla
 If you'd like to see how to create these kinds of CNN layers using PyTorch code, I have a [public, tutorial repository](https://github.com/cezannec/intro-computervision). There are instructions for setting up a local environment and running this code, or you can just look at the code and its output. The layers in this post correspond to the first notebook: **1. Convolutional NN Layers, Visualization**.
 
 <p align="center">
-<img src="/assets/cnn_intro/maxpool.png" alt="Output of all CNN layers executed in PyTorch code." width="600" >
+<img src="/assets/cnn_intro/all_layers_code.png" alt="Output of all CNN layers executed in PyTorch code." width="600" >
 </p>
 
 Note that, in the first notebook, I've initialized and explicitly defined the weights of the convolutional layer. However, when we get to training a neural network on image data, the network will have to *learn* the best weights for convolutional kernels that extract features from an input image. These learned features will be used to separate different classes of data.
