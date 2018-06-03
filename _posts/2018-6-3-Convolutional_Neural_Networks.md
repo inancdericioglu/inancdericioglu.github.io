@@ -190,11 +190,14 @@ So, these convolutional kernels, when applied to an image, make a filtered image
 
 Recall that grayscale images have pixels values that fall in a range from 0-255. However, neural networks work best with scaled "strength" values between 0 and 1 (we briefly mentioned this in the last post). So, in practice, the input image to a CNN is a grayscale image with pixel values between 0 (black) and 1 (white); a light gray is be a value like 0.78. Converting an image from a pixel value range of 0-255 to a range of 0-1 is called **normalization**. Then, this normalized input image is filtered and a convolutional layer is created. Every pixel value in a filtered image, created by a convolution operation, will fall in a different range; there may even be pixel values that are negative.
 
-To account for this change in pixel value, following a convolutional layer, a CNN applies an **activation function** that transforms each pixel value. In a CNN, you'll often use a ReLu (Rectified Linear Unit) activation function; this function simply turns all negative pixel values into 0's (black). For an input, x, the ReLU function returns x for all values of x > 0, and returns 0 for all values of x ≤ 0. An activation function also introduces [nonlinearity](https://www.quora.com/Why-does-deep-learning-architectures-only-use-the-non-linear-activation-function-in-the-hidden-layers) into a model, and this means that the CNN will be able to find non-linear thresholds/boundaries that effectively separate and classify some training data.
+To account for this change in pixel value, following a convolutional layer, a CNN applies an **activation function** that transforms each pixel value. 
 
 <p align="center">
-<img src="/assets/cnn_intro/relu_ex.png" alt="The ReLu activation function." width="400" >
+<img src="/assets/cnn_intro/relu_ex.png" alt="The ReLu activation function." width="500" >
 </p>
+
+
+In a CNN, you'll often use a ReLu (Rectified Linear Unit) activation function; this function simply turns all negative pixel values into 0's (black). For an input, x, the ReLU function returns x for all values of x > 0, and returns 0 for all values of x ≤ 0. An activation function also introduces [nonlinearity](https://www.quora.com/Why-does-deep-learning-architectures-only-use-the-non-linear-activation-function-in-the-hidden-layers) into a model, and this means that the CNN will be able to find non-linear thresholds/boundaries that effectively separate and classify some training data.
 
 
 ---
@@ -229,7 +232,7 @@ Now, you might be wondering why we would use a maxpooling layer in the first pla
 
 ## Fully-connected Layer 
 
-At the end of a convolutional neural network, is a fully-connected layer (sometimes more than one). Fully-connected means that every output that's produced at the end of the last pooling layer is an input to each node in this fully-connected layer. For example, for a final pooling layer that produces a stack of outputs that are 20 pixels in height and width and 10 pixels in depth (the number of filtered images), the fully-connected layer will see 20x20x10 = 4000 inputs. The role of the last fully-connected layer is to produce a list of **class scores**, which you saw in the last post, and perform classification based on image features that have been extracted by the earlier convolutional and pooling layers; so, the last fully-connected layer will have as many nodes as there are classes.
+At the end of a convolutional neural network, is a fully-connected layer (sometimes more than one). Fully-connected means that every output that's produced at the end of the last pooling layer is an input to each node in this fully-connected layer. For example, for a final pooling layer that produces a stack of outputs that are 20 pixels in height and width and 10 pixels in depth (the number of filtered images), the fully-connected layer will see 20x20x10 = 4000 inputs. The role of the last fully-connected layer is to produce a list of **class scores**, which you saw in the [last post](https://cezannec.github.io/Intro_Neural_Networks/), and perform classification based on image features that have been extracted by the earlier convolutional and pooling layers; so, the last fully-connected layer will have as many nodes as there are classes.
 
 <p align="center">
 <img src="/assets/cnn_intro/CNN_ex.png" alt="A CNN that sees an image of a car and outputs a class." width="600" >
