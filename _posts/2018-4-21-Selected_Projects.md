@@ -6,7 +6,6 @@ title: Past Projects and Research
 I spend a lot of my time learning and creating, and I'm trying to be better about documenting the process.
 To that end, this post will be a summary of some projects I worked on with colleagues while I was in school and 
 when I first began to teach.
-
 <p align="center"> 
 <img src="/assets/dna_gate3.png" alt="DNA logic gate with some input and output strands." >
 </p>
