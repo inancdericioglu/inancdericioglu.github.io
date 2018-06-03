@@ -15,7 +15,7 @@ Image classification is a challenging task for computers. Convolutional neural n
 
 ## Neural Network Structure
 
-This post is the second in a series about understanding how neural networks learn to separate and classify visual data. In the last post, I went over why neural networks work: they rely on the fact that most data can be represented by a smaller, simpler set of features. Neural networks are made of many nodes that learn how to best separate training data into classes, or other specified groups, and many layers of nodes can create more and more complex boundaries for separating and grouping this data.
+This post is the second in a series about understanding how neural networks learn to separate and classify visual data. In the [last post](https://cezannec.github.io/Intro_Neural_Networks/), I went over why neural networks work: they rely on the fact that most data can be represented by a smaller, simpler set of features. Neural networks are made of many nodes that learn how to best separate training data into classes, or other specified groups, and many layers of nodes can create more and more complex boundaries for separating and grouping this data.
 
 <p align="center">  
 <img src="/assets/intro_nn/complete_nn.png" alt="Complete neural network."  width="500" >
