@@ -216,13 +216,15 @@ Now, you might be wondering why we would use a maxpooling layer in the first pla
 
 ## PyTorch Code Examples
 
-If you'd like to see how to create these kinds of CNN layers using PyTorch, I have a [public, tutorial repository](https://github.com/cezannec/intro-computervision). There are instructions for setting up a local environment and running this code, or you can just skim the code and look at the output. Convolutional layers, activation functions, and maxpooling layers are in the first notebook: **1. Convolutional NN Layers, Visualization**.
+If you'd like to see how to create these kinds of CNN layers using PyTorch, take a look at my [Github, tutorial repository](https://github.com/cezannec/intro-computervision). You may choose to skim the code and look at the output or set up a local environment and run the code on your own computer (instructions for setting up a local environment are documented in the repository `readme`).
+
+Convolutional layers, activation functions, and maxpooling layers are in the first notebook: **1. Convolutional NN Layers, Visualization**.
 
 <p align="center">
 <img src="/assets/cnn_intro/all_layers_code.png" alt="Output of all CNN layers executed in PyTorch code." width="600" >
 </p>
 
-Note that, in the first notebook, I've initialized and explicitly defined the weights of the convolutional layer. However, when we get to training a neural network on image data, the network will not be given any weight values; it will *learn* the best weights for convolutional kernels that extract features from an input image. These learned features will be used to separate different classes of data.
+Note that, in the first notebook, I've explicitly defined the weights of the convolutional layer. However, when we get to training a neural network on image data, the network will not be given any weight values; it will *learn* the best weights for convolutional kernels that extract features from an input image. These learned features will be used to separate different classes of data.
 
 
 ---
