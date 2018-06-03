@@ -197,7 +197,7 @@ To account for this change in pixel value, following a convolutional layer, a CN
 </p>
 
 
-In a CNN, you'll often use a ReLu (Rectified Linear Unit) activation function; this function simply turns all negative pixel values into 0's (black). For an input, x, the ReLU function returns x for all values of x > 0, and returns 0 for all values of x ≤ 0. An activation function also introduces [nonlinearity](https://www.quora.com/Why-does-deep-learning-architectures-only-use-the-non-linear-activation-function-in-the-hidden-layers) into a model, and this means that the CNN will be able to find non-linear thresholds/boundaries that effectively separate and classify some training data.
+In a CNN, you'll often use a ReLu (Rectified Linear Unit) activation function; this function simply turns all negative pixel values into 0's (black). For an input, x, the ReLU function returns x for all values of x > 0, and returns 0 for all values of x ≤ 0. An activation function also introduces nonlinearity into a model, and this means that the CNN will be able to find nonlinear thresholds/boundaries that effectively separate and classify some training data.
 
 
 ---
