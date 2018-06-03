@@ -181,14 +181,27 @@ Above is another type of edge detection filter; this filter is computing the dif
 <img src="/assets/cnn_intro/CNN_ex.png" alt="A CNN that sees an image of a car and outputs a class." width="600" >
 </p>
 
-So, these convolutional kernels, when applied to an image, make a filtered image and *several* filtered images make a convolutional layer. Up next: the pooling layer; the most common type of pooling layer is a *maxpooling* layer.
+So, these convolutional kernels, when applied to an image, make a filtered image and *several* filtered images make a convolutional layer.
+
+
+---
+
+## Activation Function 
+
+Recall that grayscale images have pixels values that fall in a range from 0-255. However, neural networks work best with scaled "strength" values between 0 and 1 (we briefly mentioned this in the last post). So, in practice, the input image to a CNN is a grayscale image with pixel values between 0 (black) and 1 (white); a light gray is be a value like 0.78. Converting an image from a pixel value range of 0-255 to a range of 0-1 is called **normalization**. Then, this normalized input image is filtered and a convolutional layer is created. Every pixel value in a filtered image, created by a convolution operation, will fall in a different range; there may even be pixel values that are negative.
+
+To account for this change in pixel value, following a convolutional layer, a CNN applies an **activation function** that transforms each pixel value. In a CNN, you'll often use a ReLu (Rectified Linear Unit) activation function; this function simply turns all negative pixel values into 0's (black). For an input, x, the ReLU function returns x for all values of x > 0, and returns 0 for all values of x ≤ 0. An activation function also introduces [nonlinearity](https://www.quora.com/Why-does-deep-learning-architectures-only-use-the-non-linear-activation-function-in-the-hidden-layers) into a model, and this means that the CNN will be able to find non-linear thresholds/boundaries that effectively separate and classify some training data.
+
+<p align="center">
+<img src="/assets/cnn_intro/relu_ex.png" alt="The ReLu activation function." width="400" >
+</p>
 
 
 ---
 
 ## Maxpooling Layer 
 
-A pooling layer will also look at the pixel values in an image, so I'll focus on a small pixel area, again. First it breaks an image into smaller patches, often 2x2 pixel areas.
+After a convolutional layer comes a pooling layer; the most common type of pooling layer is a *maxpooling* layer. Each of these layers looks at the pixel values in an image, so, to describe maxpooling, I'll focus on a small pixel area. First, a maxpooling operation breaks an image into smaller patches, often 2x2 pixel areas.
 
 <p align="center">
 <img src="/assets/cnn_intro/patches.png" alt="2x2 pixel patches." width="300" >
@@ -209,8 +222,18 @@ For each 2x2 patch, a maxpooling layer looks at each value in a patch and select
 <img src="/assets/cnn_intro/maxpool.png" alt="2x2 pixel patches." width="500" >
 </p>
 
-Now, you might be wondering why we would use a maxpooling layer in the first place. This layer is discarding pixel information. We use a maxpooling layer for a couple of reasons. First, dimensionality reduction;  As an input image moves forward through a CNN, we are taking a fairly flat image in x-y space and expanding its depth dimension while decreasing its height and width. The network distills information about the content of an image and squishes it into a representation that will make up a reasonable number of inputs that can be seen by a fully-connected layer. Second, maxpooling makes a network resistant to small pixel value changes in an input image. Imagine that some of the pixel values in a small patch are a little bit brighter or darker. Even if a patch has some slightly different pixel values, the maximum value, if it is a large enough maximum, should be the same.
+Now, you might be wondering why we would use a maxpooling layer in the first place. This layer is discarding pixel information. We use a maxpooling layer for a couple of reasons. First, dimensionality reduction;  As an input image moves forward through a CNN, we are taking a fairly flat image in x-y space and expanding its depth dimension while decreasing its height and width. The network distills information about the content of an image and squishes it into a representation that will make up a reasonable number of inputs that can be seen by a fully-connected layer. Second, maxpooling makes a network resistant to small pixel value changes in an input image. Imagine that some of the pixel values in a small patch are a little bit brighter or darker. Even if a patch has some slightly different pixel values, the maximum value, if it is a large enough maximum, should be the same. There are also other kinds of networks that do *not* use maxpooling, such as Capsule Networks, but that is a post for another day!
 
+
+---
+
+## Fully-connected Layer 
+
+At the end of a convolutional neural network, is a fully-connected layer (sometimes more than one). Fully-connected means that every output that's produced at the end of the last pooling layer is an input to each node in this fully-connected layer. For example, for a final pooling layer that produces a stack of outputs that are 20 pixels in height and width and 10 pixels in depth (the number of filtered images), the fully-connected layer will see 20x20x10 = 4000 inputs. The role of the last fully-connected layer is to produce a list of **class scores**, which you saw in the last post, and perform classification based on image features that have been extracted by the earlier convolutional and pooling layers; so, the last fully-connected layer will have as many nodes as there are classes.
+
+<p align="center">
+<img src="/assets/cnn_intro/CNN_ex.png" alt="A CNN that sees an image of a car and outputs a class." width="600" >
+</p>
 
 ---
 
