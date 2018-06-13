@@ -6,7 +6,7 @@ title: Capsule Networks
 Capsule Networks provide a way to detect parts of objects in an image and represent spatial relationships between those parts. This means that capsule networks are able to recognize the same object in a variety of different poses even if they have not seen that pose in training data. So, what is a capsule and how do they work? 
 <p align="center">
 <video controls="controls" width="500" height="300" 
-name="Video Name" src="/assets/capsules/capsule_mov.mov"></video>
+name="Video Name" src="/assets/capsules/capsule_animation.mov"></video>
 </p>
 
 <!--more-->
