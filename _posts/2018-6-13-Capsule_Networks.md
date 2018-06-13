@@ -35,7 +35,7 @@ A more complex tree is pictured below. Note that the child nodes in higher layer
 In the example below, you can see how the parts of a face (eyes, nose, mouth, etc.) might be recognized in leaf nodes and then combined to form a more complete face part in parent nodes.
 
 <p align="center">
-<img src="/assets/capsules/face_parse_tree.png" alt="Tree child nodes that notice small facial parts (single eyes, nose, mouth, etc.) and parent nodes that put those observations together to form a whole face at the "top" of the tree." width="400" >
+<img src="/assets/capsules/face_parse_tree.png" alt="Tree child nodes that notice small facial parts (single eyes, nose, mouth, etc.) and parent nodes that put those observations together to form a whole face at the top of the tree." width="400" >
 </p>
 
 Parent nodes combine observations from child nodes to build up a more complex picture. In a neural network structure, you'll often see these trees rotated so that they are on their side. This may start to look like a familiar image of a neural network, with layers of nodes that process some input data, produce outputs, and pass those outputs to the next layer of nodes.
@@ -54,7 +54,7 @@ Recall that every node in this tree represents a capsule in a capsule network, a
 Capsules are a small group of neurons where each neuron in a capsule represents various properties of a particular image part. Some examples of part properties include: position and orientation in an image, width, and texture.
 
 <p align="center">
-<img src="/assets/capsules/capsule_ex.png" alt="A single capsule containing multiple neurons (part properties)." width="300" >
+<img src="/assets/capsules/capsule_ex.png" alt="A single capsule containing multiple neurons (part properties)." width="400" >
 </p>
 
 A special part property is its **existence** in an image. 
@@ -81,13 +81,13 @@ Every capsule outputs a vector, **u**, with a magnitude and orientation.
 Going back to the cat face detection example, say a capsule detects a cat's face in an image, and it outputs a vector with a magnitude of 0.9. This means that it detects a face with 90% confidence.
 
 <p align="center">
-<img src="/assets/capsules/cat_face_1.png" alt="An upright cat's face, detected by a capsule with 90% confidence." width="500" >
+<img src="/assets/capsules/cat_face_1.png" alt="An upright cat's face, detected by a capsule with 90% confidence." width="600" >
 </p>
 
 If we then look at a different image of this cat's face, one in which the cat has flipped, the orientation of this capsule's output vector will change. The face part properties, position, orientation, and shape, have changed in this new image, and the orientation of the output vector changes with each of these property changes. These changes are changes in neural activities inside a capsule. The *magnitude* of the vector should remain very close to 0.9  since the capsule should still be confident that the face exists in the image!
 
 <p align="center">
-<img src="/assets/capsules/cat_face_2.png" alt="An upside-down cat's face, detected by a capsule with 90% confidence." width="500" >
+<img src="/assets/capsules/cat_face_2.png" alt="An upside-down cat's face, detected by a capsule with 90% confidence." width="600" >
 </p>
 
 
@@ -135,11 +135,11 @@ Dynamic routing is an iterative process that updates these coupling coefficients
 * This dot product between the parent output vector, **v**, and a prediction vector, **u_hat**, is known as a measure of capsule agreement, **a**.
 
 <p align="center">
-<img src="/assets/capsules/u_hat.png" alt="u_hat equals a weight matrix W times u, the capsule output vector." width="200" >
+<img src="/assets/capsules/u_hat.png" alt="u_hat equals a weight matrix W times u, the capsule output vector." width="160" >
 </p>
 
 <p align="center">
-<img src="/assets/capsules/agreement.png" alt="Agreement equals the parent capsule's output times the prediction vector." width="200" >
+<img src="/assets/capsules/agreement.png" alt="Agreement equals the parent capsule's output times the prediction vector." width="160" >
 </p>
 
 This is sometimes referred to as *top-down* feedback; feedback from a later layer of parent capsule outputs. 
