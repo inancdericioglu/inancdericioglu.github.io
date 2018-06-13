@@ -21,7 +21,7 @@ Capsule Networks are modeled after how humans tend to focus. Our visual system i
 For the purpose of capsule networks, we’re going to model this piece-by-piece focus as a tree. Trees are made of parent nodes and descendant, children nodes. They are called trees because they are modeled after the shape of tree branches.
 
 <p align="center">
-<img src="/assets/capsules/simple_tree.png" alt="A tree made of one parent node and two, descendant child nodes." width="300" >
+<img src="/assets/capsules/simple_tree.png" alt="A tree made of one parent node and two, descendant child nodes." width="200" >
 </p>
 
 A more complex tree is pictured below. Note that the child nodes in higher layers are *parents* of their own child nodes; these have been color-coded in the diagram so that if a node is a child and parent, its child node text color matches it's corresponding parent node's text color. For example, a node that has purple "parent" text will be attached to a corresponding child node with a purple "child" label. Parent nodes may have more than one child and child nodes can be attached to multiple parents. Also, a "leaf" is a kind of child node without any children. In the case of capsule networks:
@@ -54,12 +54,12 @@ Recall that every node in this tree represents a capsule in a capsule network, a
 Capsules are a small group of neurons where each neuron in a capsule represents various properties of a particular image part. Some examples of part properties include: position and orientation in an image, width, and texture.
 
 <p align="center">
-<img src="/assets/capsules/capsule_ex.png" alt="A single capsule containing multple neurons (part properties)." width="300" >
+<img src="/assets/capsules/capsule_ex.png" alt="A single capsule containing multiple neurons (part properties)." width="300" >
 </p>
 
 A special part property is its **existence** in an image. 
 
-#### Existence
+### Existence
 
 We can represent a part's existence in any image by a probability value: 0 if that part is not detected and 1 if it is; a value of 0.8 indicates an 80% confidence that the part has been found in the image. For example, say we are trying to identify a cat and one part we are trying to identify is a cat's face. We could approach this task in a couple of ways. One way to find the existence of this part, in any image of a cat, is to perform a binary classification: contains-part or doesn't-contain-part, and use those class scores to get the probability of existence. Another way is to look at all of the part properties in a capsule (the width and texture of the face, the angle the face is pointing, etc.) and say that the probability of existence is a function of the number of those properties. If a face-like shape is detected and a certain width and angle are identified, these property neurons will become *active*, and we can use this activity to indicate the existence of a part. This is the approach that capsules take, and it offers a number of advantages to the binary classification approach.
 
@@ -81,13 +81,13 @@ Every capsule outputs a vector, **u**, with a magnitude and orientation.
 Going back to the cat face detection example, say a capsule detects a cat's face in an image, and it outputs a vector with a magnitude of 0.9. This means that it detects a face with 90% confidence.
 
 <p align="center">
-<img src="/assets/capsules/cat_face_1.png" alt="An upright cat's face, detected by a capsule with 90% confidence." width="400" >
+<img src="/assets/capsules/cat_face_1.png" alt="An upright cat's face, detected by a capsule with 90% confidence." width="500" >
 </p>
 
 If we then look at a different image of this cat's face, one in which the cat has flipped, the orientation of this capsule's output vector will change. The face part properties, position, orientation, and shape, have changed in this new image, and the orientation of the output vector changes with each of these property changes. These changes are changes in neural activities inside a capsule. The *magnitude* of the vector should remain very close to 0.9  since the capsule should still be confident that the face exists in the image!
 
 <p align="center">
-<img src="/assets/capsules/cat_face_2.png" alt="An upsidedown cat's face, detected by a capsule with 90% confidence." width="400" >
+<img src="/assets/capsules/cat_face_2.png" alt="An upside-down cat's face, detected by a capsule with 90% confidence." width="500" >
 </p>
 
 
@@ -172,10 +172,10 @@ Dynamic routing can be viewed as a parallel attention mechanism that allows caps
 
 During the training process, while figuring out appropriate coupling coefficients between child and parent capsules, a capsule network learns the spatial relationships between parts and their wholes. For example, in our face tree example, a capsule network would need to know that a typical face has a left and right eye, a nose and mouth below the eyes, and only then would it piece these together to form a complete face! 
 
-The spatial relationships between parts can be modelled by a series of matrix multiplications, between the output of child capsules and parents, that capture the pose (the position and orientation) of each part; then a capsule network essentially checks for "agreement" between these poses. 
+The spatial relationships between parts can be modeled by a series of matrix multiplications, between the output of child capsules and parents, that capture the pose (the position and orientation) of each part; then a capsule network essentially checks for **agreement** between these poses. 
 
 <p align="center">
-<img src="/assets/capsules/complete_coeffs.png" alt="Transformation matrices between a coule layers of a capsule network." width="500" >
+<img src="/assets/capsules/transformation.png" alt="Transformation matrices between a couple layers of a capsule network." width="500" >
 </p>
 
 For example, agreement can ensure that all the parts of a single face are facing in the same direction or that there are one or two eyes on a face and not three. This is in contrast to a typical CNN which only checks for the existence of different features, but not their relationship to one another. Capsules use neural activities that vary with object orientation. They learn to represent spatial relationships between parts and whole objects, which makes it easier for a capsule network to identify an object no matter what orientation it is in.
