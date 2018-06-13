@@ -168,9 +168,11 @@ Dynamic routing can be viewed as a parallel attention mechanism that allows caps
 
 ---
 
-## Spatial Relationships 
+## Learning Spatial Relationships 
 
-During the training process, while figuring out appropriate coupling coefficients between child and parent capsules, a capsule network learns the spatial relationships between parts and their wholes. For example, in our face tree example, a capsule network would need to know that a typical face has a left and right eye, a nose and mouth below the eyes, and only then would it piece these together to form a complete face! 
+During the training process, while figuring out appropriate coupling coefficients between child and parent capsules, a capsule network learns the spatial relationships between parts and their wholes. 
+
+For example, to recognize a face, a capsule network would need to know that a typical face has a left and right eye, and a nose and mouth below those eyes. Then, only if it sees those parts in their *expected* locations, a capsule network could put those parts together to identify a complete face.
 
 The spatial relationships between parts can be modeled by a series of matrix multiplications, between the output of child capsules and parents, that capture the pose (the position and orientation) of each part; then a capsule network essentially checks for **agreement** between these poses. 
 
