@@ -5,8 +5,8 @@ title: Capsule Networks
 
 Capsule Networks provide a way to detect parts of objects in an image and represent spatial relationships between those parts. This means that capsule networks are able to recognize the same object in a variety of different poses even if they have not seen that pose in training data. So, what is a capsule and how do they work? 
 <p align="center">
-<video controls="controls" width="500" height="300" 
-name="Video Name" src="/assets/capsules/capsule_animation.mov"></video>
+<video controls="controls" width="500" height="400" 
+name="Video Name" src="/assets/capsules/capsule_output_mov.mov"></video>
 </p>
 
 <!--more-->
@@ -116,7 +116,7 @@ This routing process discards a lot of pixel information and it produces vastly 
 
 ### Coupling Coefficients
 
-When a capsule network is initialized, capsules are not sure which parents their outputs should go to. In fact, each capsule starts out with a list of **possible parents** that starts out as *all* parent capsules in the next layer. This possibility is represented by a value called the **coupling coefficient**, which is the probability that a certain capsule's output should go to a parent capsule in the next layer. Examples of coupling coefficients, written on the connecting lines between a child and its possible parent nodes, are pictured below. A child node with two possible parents will start out with equal coupling coefficients for both: 0.5.
+When a capsule network is initialized, capsules are not sure which parents their outputs should go to. In fact, each capsule starts out with a list of *possible* parents that starts out as all parent capsules in the next layer. This possibility is represented by a value called the **coupling coefficient**, which is the probability that a certain capsule's output should go to a parent capsule in the next layer. Examples of coupling coefficients, written on the connecting lines between a child and its possible parent nodes, are pictured below. A child node with two possible parents will start out with equal coupling coefficients for both: 0.5.
 
 <p align="center">
 <img src="/assets/capsules/coupling_coeff_ex.png" alt="Coupling coefficients between a child capsule and two possible parents." width="400" >
@@ -128,7 +128,7 @@ The coupling coefficients across all possible parents can be pictured as a discr
 
 Dynamic routing is an iterative process that updates these coupling coefficients. The update process, performed during network training, is as follows for a single capsule:
 
-* For each possible parent, a child capsule computes a **prediction vector**, **u_hat**, which is a function of its output vector, **u**, times a weight matrix, **W**. 
+* For each possible parent, a child capsule computes a *prediction vector*, **u_hat** (^), which is a function of its output vector, **u**, times a weight matrix, **W**. 
 
 * If the prediction vector has a large **dot product** with the *parent* capsule output vector, **v**, then the coupling coefficient between that parent and the child capsule increases, and the coupling coefficient between that child capsule and all other parents, decreases.
 
