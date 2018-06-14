@@ -155,8 +155,8 @@ A high coupling coefficient, between a child and parent capsule, increases the c
 This is called **routing by agreement**. If the orientation of the output vectors of capsules in successive layers are aligned, then they agree that they should be coupled, and the connections between them are strengthened. The coupling coefficients are calculated by a [softmax function](https://en.wikipedia.org/wiki/Softmax_function) that operates on the agreements, **a**, between capsules and turns them into probabilities such that the coefficients between one child and its possible parents sum to 1. 
 
 <p align="center">
-<video controls="controls" width="500" height="300" 
-name="Video Name" src="/assets/capsules/coeff_update_mov.mov"></video>
+<video controls="controls" width="600" height="400" 
+name="Video Name" src="/assets/capsules/agreement_update.mov"></video>
 </p>
 
 A typical training process may include three such agreement iterations and final coupling coefficients may look like the following image, with some child capsules choosing one dominant parent and others contributing to both parents.
