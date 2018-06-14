@@ -14,10 +14,3 @@ to image processing. She has also taught programming courses in Python and in Ja
 ### Contact me
 
 [cezannec@alumni.stanford.edu](mailto:cezannec@alumni.stanford.edu)
-
-
-### License
-
-Copyright (c) 2018 Cezanne Camacho.
-
-All images and text appearing on this website may be copied, distributed, displayed, and remixed *with attribution*.
