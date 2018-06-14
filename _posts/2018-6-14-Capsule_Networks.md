@@ -35,13 +35,13 @@ A more complex tree is pictured below. Note that the child nodes in higher layer
 In the example below, you can see how the parts of a face (eyes, nose, mouth, etc.) might be recognized in leaf nodes and then combined to form a more complete face part in parent nodes.
 
 <p align="center">
-<img src="/assets/capsules/face_parse_tree.png" alt="Tree child nodes that notice small facial parts (single eyes, nose, mouth, etc.) and parent nodes that put those observations together to form a whole face at the top of the tree." width="400" >
+<img src="/assets/capsules/face_parse_tree.png" alt="Tree child nodes that notice small facial parts (single eyes, nose, mouth, etc.) and parent nodes that put those observations together to form a whole face at the top of the tree." width="340" >
 </p>
 
 Parent nodes combine observations from child nodes to build up a more complex picture. In a neural network structure, you'll often see these trees rotated so that they are on their side. This may start to look like a familiar image of a neural network, with layers of nodes that process some input data, produce outputs, and pass those outputs to the next layer of nodes.
 
 <p align="center">
-<img src="/assets/capsules/sideways_tree.png" alt="Layers of child and parent nodes rotated so that they look like a typical neural network." width="500" >
+<img src="/assets/capsules/sideways_tree.png" alt="Layers of child and parent nodes rotated so that they look like a typical neural network." width="400" >
 </p>
 
 Recall that every node in this tree represents a capsule in a capsule network, and as we move forward through these layers, the capsules in each layer can build up a more complete representation of an object in an image piece-by-piece. Next, let's see how capsules represent image and object parts.
