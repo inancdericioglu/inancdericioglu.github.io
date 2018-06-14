@@ -116,10 +116,10 @@ This routing process discards a lot of pixel information and it produces vastly 
 
 ### Coupling Coefficients
 
-When a capsule network is initialized, capsules are not sure which parents their outputs should go to. In fact, each capsule starts out with a list of *possible* parents that starts out as all parent capsules in the next layer. This possibility is represented by a value called the **coupling coefficient**, which is the probability that a certain capsule's output should go to a parent capsule in the next layer. Examples of coupling coefficients, written on the connecting lines between a child and its possible parent nodes, are pictured below. A child node with two possible parents will start out with equal coupling coefficients for both: 0.5.
+When a capsule network is initialized, capsules are not sure which parents their outputs should go to. In fact, each capsule starts out with a list of *possible* parents that starts out as all parent capsules in the next layer. This possibility is represented by a value called the *coupling coefficient*, **c**, which is the probability that a certain capsule's output should go to a parent capsule in the next layer. Examples of coupling coefficients, written on the connecting lines between a child and its possible parent nodes, are pictured below. A child node with two possible parents will start out with equal coupling coefficients for both: 0.5.
 
 <p align="center">
-<img src="/assets/capsules/coupling_coeff_ex.png" alt="Coupling coefficients between a child capsule and two possible parents." width="400" >
+<img src="/assets/capsules/coupling_coeff.png" alt="Coupling coefficients between a child capsule and two possible parents." width="400" >
 </p>
 
 The coupling coefficients across all possible parents can be pictured as a discrete probability distribution. Across all connections between *one* child capsule and all possible parent capsules, the coupling coefficients should sum to 1.
@@ -144,15 +144,20 @@ Dynamic routing is an iterative process that updates these coupling coefficients
 
 This is sometimes referred to as *top-down* feedback; feedback from a later layer of parent capsule outputs. 
 
-The dot product between two vectors is a single value that can be thought of as a measure of orientation similarity or alignment. Consider the two vectors, **a** and **b**, below. The dot product between **a** and **b** is calculated as their magnitudes times the cosine of the angle between them: a\*b\*cos(theta). Cosine is at a maximum value (1) if the two vectors have no angle difference between them, and is at a minimum (0) when the two vectors have a right-angle difference between them.
+The dot product between two vectors is a single value that can be thought of as a measure of orientation similarity or alignment. Consider the two vectors, **a** and **b**, below. The dot product between **a** and **b** is calculated as their magnitudes times the cosine of the angle, alpha, between them: a\*b\*cos(alpha). Cosine is at a maximum value (1) if the two vectors have no angle difference between them, and is at a minimum (0) when the two vectors have a right-angle difference between them. In the example below, the dot product is calculated for two vectors with an alpha equal to 35 degrees.
 
 <p align="center">
-<img src="/assets/capsules/dot_product.png" alt="Dot product between two vectors, a and b." width="300" >
+<img src="/assets/capsules/dot_prod_ex.png" alt="Dot product between two vectors, a and b. 0.8*0.5*cos(35 degrees) = 0.328." width="400" >
 </p>
 
 A high coupling coefficient, between a child and parent capsule, increases the contribution of the child to that parent, thus *further* aligning their two output vectors and making their agreement dot product even larger! 
 
 This is called **routing by agreement**. If the orientation of the output vectors of capsules in successive layers are aligned, then they agree that they should be coupled, and the connections between them are strengthened. The coupling coefficients are calculated by a [softmax function](https://en.wikipedia.org/wiki/Softmax_function) that operates on the agreements, **a**, between capsules and turns them into probabilities such that the coefficients between one child and its possible parents sum to 1. 
+
+<p align="center">
+<video controls="controls" width="500" height="300" 
+name="Video Name" src="/assets/capsules/coeff_update_mov.mov"></video>
+</p>
 
 A typical training process may include three such agreement iterations and final coupling coefficients may look like the following image, with some child capsules choosing one dominant parent and others contributing to both parents.
 
@@ -180,7 +185,9 @@ The spatial relationships between parts can be modeled by a series of matrix mul
 <img src="/assets/capsules/transformation.png" alt="Transformation matrices between a couple layers of a capsule network." width="500" >
 </p>
 
-For example, agreement can ensure that all the parts of a single face are facing in the same direction or that there are one or two eyes on a face and not three. This is in contrast to a typical CNN which only checks for the existence of different features, but not their relationship to one another. Capsules use neural activities that vary with object orientation. They learn to represent spatial relationships between parts and whole objects, which makes it easier for a capsule network to identify an object no matter what orientation it is in.
+For example, agreement can ensure that all the parts of a single face are facing in the same direction or that there are one or two eyes on a face and not three. This is in contrast to a typical CNN which only checks for the existence of different features, but not their relationship to one another. 
+
+Capsules use neural activities that vary with object orientation. They learn to represent spatial relationships between parts and whole objects, which makes it easier for a capsule network to identify an object no matter what orientation it is in.
 
 
 ---
