@@ -179,7 +179,7 @@ During the training process, while figuring out appropriate coupling coefficient
 
 For example, to recognize a face, a capsule network would need to know that a typical face has a left and right eye, and a nose and mouth below those eyes. Then, only if it sees those parts in their *expected* locations, a capsule network could put those parts together to identify a complete face.
 
-The spatial relationships between parts can be modeled by a series of matrix multiplications, between the output of child capsules and parents, that capture the pose (the position and orientation) of each part; then a capsule network essentially checks for **agreement** between these poses. 
+The spatial relationships between parts can be modeled by a series of matrix multiplications, between the output of child capsules and parents, that capture the pose (the position and orientation) of each part; then a capsule network essentially checks for **agreement** between these poses. Agreement is based on the vector orientations of child and parent capsules, and when compared to the scalar outputs of a typical convolutional layer, a capsule's vector output can provide more information.
 
 <p align="center">
 <img src="/assets/capsules/transformation.png" alt="Transformation matrices between a couple layers of a capsule network." width="500" >
