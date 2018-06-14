@@ -74,7 +74,7 @@ Every capsule outputs a vector, **u**, with a magnitude and orientation.
 <img src="/assets/capsules/output_vector.png" alt="A capsule's output vector with a magnitude and orientation." width="500" >
 </p>
 
-* The magnitude of the vector is a value between 0 and 1 that indicates the probability that a part exists and has been detected in an image. This is a normalized function of the number of part parameters that have been detected by the neurons that make up a capsule; this is a nonlinear function called "squashing."
+* The magnitude of the vector is a value between 0 and 1 that indicates the probability that a part exists and has been detected in an image. This is a normalized function of the number of part parameters that have been detected by the neurons that make up a capsule; a nonlinear function called **squashing**.
 
 * The orientation of the vector represents the state of the part properties; this orientation will change if one of the part properties changes.
 
