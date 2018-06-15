@@ -5,9 +5,8 @@ title: Introduction to Neural Networks
 
 How and why do neural networks work?
 The first in a series about understanding how neural networks learn to separate and classify visual data. 
-<p align="center">
-<video controls="controls" width="500" height="300" 
-name="Video Name" src="/assets/intro_nn/neuron_inout.mov"></video>
+<p align="center"> 
+<img src="/assets/intro_nn/neuron_inout.gif" alt="Input signals and produced output for a neuron." width="500" >
 </p>
 
 <!--more-->
@@ -124,9 +123,8 @@ Each node in the fully-connected layer is connected to the output of every previ
 
 So, for a red color input, let’s go through what this network does. The network sees that this input color passes the red threshold, but not the blue threshold. The nodes output a 1 and 0, respectively. These output values move forward to the next, fully-connected layer and are seen as inputs. The fully-connected layer has nodes that respond to different combinations of these 1/0 inputs, and sort each combination of 1’s and 0’s into one of our three classes. In this case, the combination of 1 and 0 (red but no blue), causes an output of 1 for the red class. These final output values, similar to the "yes" and "no" threshold outputs, are usually represented by a value between 1 and 0.
 
-<p align="center">
-<video controls="controls" width="500" height="300" 
-name="Video Name" src="/assets/intro_nn/process_red.mov"></video>
+<p align="center"> 
+<img src="/assets/intro_nn/process_red.gif" alt="Red color input moving through the color classification network." width="500" >
 </p>
 
 #### Class Scores
@@ -135,9 +133,8 @@ These outputs are often called confidence scores or **class scores**. And you ca
 
 This network should be able to handle new colors, those that have some blue and red component, so let’s take dark purple as an example. A dark purple definitely passes the blue threshold, but what about the red? Well, our network sees it and thinks that it is close to passing but it's not entirely sure, so it may output a value like 0.6 for the red threshold (closer to yes than no). When this value moves through this network, we’ll see that this triggers both the blue and purple class nodes. This would produce class scores with the highest value for the purple class but some small value for blue, as well. So, even with this “maybe” value for the red threshold, it turns out that this color is classified as purple, according to this network.
 
-<p align="center">
-<video controls="controls" width="500" height="300" 
-name="Video Name" src="/assets/intro_nn/process_new_color.mov"></video>
+<p align="center"> 
+<img src="/assets/intro_nn/process_new_color.gif" alt="Dark purple color input moving through the color classification network." width="500" >
 </p>
 
 You might be wondering why I chose these colors, and it’s because this simple example can extend to all the colors in our initial rainbow! To account for some of the warmer colors, we have to add one more feature to our model: yellow. Now, all the colors in this rainbow can be represented by combination of red, yellow, and blue strengths.
