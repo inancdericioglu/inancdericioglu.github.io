@@ -5,7 +5,7 @@ title: Capsule Networks
 
 Capsule Networks provide a way to detect parts of objects in an image and represent spatial relationships between those parts. This means that capsule networks are able to recognize the same object in a variety of different poses even if they have not seen that pose in training data. So, what is a capsule and how do they work? 
 <p align="center">
-<img src="/assets/capsules/capsule_output_gif.gif" alt="Capsule producing an output vector." width="400" >
+<img src="/assets/capsules/capsule_output.gif" alt="Capsule producing an output vector." width="400" >
 </p>
 
 <!--more-->
@@ -154,7 +154,7 @@ A high coupling coefficient, between a child and parent capsule, increases the c
 This is called **routing by agreement**. If the orientation of the output vectors of capsules in successive layers are aligned, then they agree that they should be coupled, and the connections between them are strengthened. The coupling coefficients are calculated by a [softmax function](https://en.wikipedia.org/wiki/Softmax_function) that operates on the agreements, **a**, between capsules and turns them into probabilities such that the coefficients between one child and its possible parents sum to 1. 
 
 <p align="center">
-<img src="/assets/capsules/agreement_gif.gif" alt="Dynamic routing." width="400" >
+<img src="/assets/capsules/dynamic_routing.gif" alt="Dynamic routing." width="600" >
 </p>
 
 A typical training process may include three such agreement iterations and final coupling coefficients may look like the following image, with some child capsules choosing one dominant parent and others contributing to both parents.
