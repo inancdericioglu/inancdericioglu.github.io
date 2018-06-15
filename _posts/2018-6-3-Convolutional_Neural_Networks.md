@@ -88,8 +88,7 @@ Every CNN is made up of multiple layers, the three main types of layers are conv
 The convolutional layer can be though of as the *feature extractor* of this network, it learns to find spatial features in an input image. This layer is produced by applying a series of many different image filters, also known as convolutional kernels, to an input image. These filters a very small grids of values that slide over an image pixel-by-pixel, and produce a filtered output image that will be about the same size as the input image. Multiple kernels will produce multiple filtered, output images.
 
 <p align="center">
-<video controls="controls" width="500" height="300" 
-name="Video Name" src="/assets/cnn_intro/conv_layer.mov"></video>
+<img src="/assets/cnn_intro/conv_layer.gif" alt="Convolutional layer made of multiple filters." width="500" >
 </p>
 
 Say we have four different convolutional kernels, these will produce four different, filtered images as output. The idea is that each filter will extract a different feature from an input image and these features will eventually help to classify that image, for example, one filter might detect the edges of objects in that image and another might detect unique patterns in color. These filters, stacked together, are what make up a convolutional layer.
@@ -122,8 +121,7 @@ You may notice that all the elements in this 3x3 grid sum to zero. For an edge d
 To apply this filter to an image, an input image, F(x,y), is convolved with the kernel, K. Convolution is represented by an asterisk (not to be mistaken for multiplication). It involves taking a kernel, which is our small grid of numbers, and passing it over an image, pixel-by-pixel, creating another edge-detected output image whose appearance depends on the kernel values.
 
 <p align="center">
-<video controls="controls" width="500" height="300" 
-name="Video Name" src="/assets/cnn_intro/filter_inaction.mov"></video>
+<img src="/assets/cnn_intro/filter_in_action.gif" alt="Filter passing over an image of a car." width="500" >
 </p>
 
 I’ll walk through a specific example, using the 3x3 edge detection filter.
@@ -144,8 +142,7 @@ The steps for a complete convolution are as follows:
 2. Sum all these multiplied pairs of values to get a new value, in this case, 175. This value will be the new pixel value in the filtered output image, at the same (x,y) location as the selected center pixel.
 
 <p align="center">
-<video controls="controls" width="500" height="300" 
-name="Video Name" src="/assets/cnn_intro/convolution_steps.mov"></video>
+<img src="/assets/cnn_intro/convolution_steps.gif" alt="Convolution operations." width="500" >
 </p>
 
 This process repeats for every pixel in the input image, until we are left with a complete, filtered output.
@@ -165,8 +162,7 @@ The kernel also contains negative weights with a value of -1. These correspond t
 The only pixels for which convolution doesn't work are the pixels at the borders of an image. A 3x3 kernel cannot be perfectly placed over a center pixel at the edges or corners of an image. In practice, there are a few of ways of dealing with this, the most common ways are to either pad this image with a border of 0’s (or another grayscale value) so that we can perfectly overlay a kernel on all the pixel values in the original image, or to ignore the pixel values at the borders of the image, and only look at pixels where we can completely overlay the 3x3 convolutional kernel.
 
 <p align="center">
-<video controls="controls" width="500" height="300" 
-name="Video Name" src="/assets/cnn_intro/edge_handling.mov"></video>
+<img src="/assets/cnn_intro/edge_handling.gif" alt="Convolutional kernel, moving to the edges of an image, where it cannot entirely cover the pixels." width="500" >
 </p>
 
 Often, there is not a lot of useful information at the border of an image, but if you do choose to ignore this information, every filtered image will be just a little bit smaller that the original input image. For a 3x3 kernel, we’ll actually lose a pixel from each side of an image, resulting in a filtered output that is two pixels smaller in width and in height than the original image. You can also choose to make larger filters. 3x3 is one of the smallest sizes and it’s good for looking at small pixel areas, but if you are analyzing larger images you may want to increase the area and use kernels that are 5x5, 7x7, or larger. Usually, you want an odd number so that the kernel nicely overlays a center pixel.
@@ -212,11 +208,8 @@ After a convolutional layer comes a pooling layer; the most common type of pooli
 
 Let’s zoom in even further on four of these patches. A maxpooling layer is defined by the patch size, 2x2, and a stride. The patch can be thought of as a 2x2 window that the maxpooling layer looks at to select a maximum pixel value. It then moves this window by some stride across and down the image. For a patch of size 2x2 and a stride of 2, this window will perfectly cover the image. A smaller stride would see some overlap in patches and a larger stride would miss some pixels entirely. So, we usually see a patch size and a stride size that are the same.
 
-
-
 <p align="center">
-<video controls="controls" width="400" height="200" 
-name="Video Name" src="/assets/cnn_intro/stride.mov"></video>
+<img src="/assets/cnn_intro/stride.gif" alt="Maxpooling 2x2 stride box moving over a 4x4 image with no overlap." width="400" >
 </p>
 
 For each 2x2 patch, a maxpooling layer looks at each value in a patch and selects only the maximum value. In the red patch it selects 140, in the yellow, 90, and so on, until we are left with four values from the four patches.
