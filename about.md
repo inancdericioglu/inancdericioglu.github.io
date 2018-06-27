@@ -17,4 +17,4 @@ to image processing. You can read about her past research, [here](https://cezann
 
 ---
 
-If you'd like to use any of my original images or text from these posts, please attribute: Cezanne Camacho, 2018.
+If you'd like to use any of my original images or text from these posts, please provide the following attribution: Cezanne Camacho, title and year of the post.
