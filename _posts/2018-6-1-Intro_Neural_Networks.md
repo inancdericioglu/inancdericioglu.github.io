@@ -103,7 +103,7 @@ I’m skipping over one detail here, which is that this input color will be seen
 
 #### Activation Function
 
-Neural networks really only work with numerical data and so this no or yes output will be a numerical value: 1 for yes or 0 for no. We can even represent a “maybe” with a value in between 0 and 1. To get a value between 0 and 1, we apply something called an **activation function**, which is a function that processes the output of a neuron and scales it from 0-1. In general these scaled values are a really good and consistent way to measure the strength of any input or output signal and this consistency becomes really helpful when a neural network trains.
+Neural networks really only work with numerical data and so this no or yes output will be a numerical value. In this case, we'll use a 1 for yes and a 0 for no. We can even represent a “maybe” with a value in between 0 and 1. To get a value between 0 and 1, we can apply something called an **activation function**, which is a function that processes the output of a neuron and scales an output value to fit in some range, such as the range from 0 to 1. In general, these scaled values are a really good and consistent way to measure the strength of any input or output signal and this consistency becomes really helpful when a neural network trains.
 
 <p align="center">  
 <img src="/assets/intro_nn/nn_activation.png" alt="Activation function applied to the output of each node."  width="300" >
