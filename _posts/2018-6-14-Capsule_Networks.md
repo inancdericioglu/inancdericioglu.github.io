@@ -187,8 +187,46 @@ For example, agreement can ensure that all the parts of a single face are facing
 
 Capsules use neural activities that vary with object orientation. They learn to represent spatial relationships between parts and whole objects, which makes it easier for a capsule network to identify an object no matter what orientation it is in.
 
+---
+
+## Capsule Network Architecture & Implementation
+
+A Capsule Network can be broken down into two main parts:
+1. A convolutional encoder
+2. A fully-connected, linear decoder
+
+<p align="center" >
+<img src='./assets/capsules/complete_caps_net.png' width="500" />
+</p>
+
+The above image was taken from the original [Capsule Network paper (Hinton et. al.)](https://arxiv.org/pdf/1710.09829.pdf). I
+
+I've implemented the capsule network in PyTorch code and you can find that readable implementation [in my Github repository](https://github.com/cezannec/capsule_net_pytorch). In the notebook, I define and train a simple Capsule Network that aims to classify MNIST images. The notebook follows the architecture described in the original paper and tries to replicate some of the experiments, such as feature visualization, that the authors pursued. I've taken note of some model attributes that I found particularly interesting, below, and I encourage you to read through the implementation or try to run the code, locally!
+
+### Decoder Reconstructions
+
+The decoder sees as input the 16-dimensional vectors that are produced by the "DigitCaps" layer. There is one "correct" capsule output vector; this vector is the vector with the largest vector magnitude of all ten digit capsule outputs (recall that vector magnitude correspond to a part's existence in an image). Then, the decoder upsamples that one vector, decoding it into a reconstructed image of a handwritten digit. So, the decoder is learning a mapping from a capsule output vector to a 784-dim vector that can be reshaped into a 28x28 reconstructed image. You can see some sample reconstructions, below. The original images are on the top row, and their reconstructions are in the row below; you can see that the reconstructions are blurrier but, generally, quite good.
+
+<p align="center" >
+<img src='./assets/capsules/reconstructions.png' width="400" />
+</p>
+
+This will be a great visualization tool and this decoder acts as a regularization technique, forcing the 16-dimensional vectors to encode something about the content of an input image.
+
+
+### Output Vector Dimensions
+
+The final capsule layer (named "DigitCaps" in the above diagram) outputs vectors of length 16. It turns out that some of these vector dimensions have learned to represent the features that make up and distinguish each class of handwritten digit, 0-9. The features that distinguish different image classes are traits like image width, skew, line thickness, and so on. In my implementation, I tried to visualize what each vector dimension represents by slightly modifying the capsule output vectors and visualizing the reconstructed images. I've highlighted some of my results below.
+
+<p align="center" >
+<img src='./assets/capsules/perturbed_reconstructions.png' width="500" />
+</p>
+
+You can see all of these experiments and results in my [complete implementation](https://github.com/cezannec/capsule_net_pytorch).
+
 
 ---
+This post was edited on November 17, 2018.
 
 If you are interested in my work and thoughts, check out my [Twitter](https://twitter.com/cezannecam) or connect with me on [LinkedIn](https://www.linkedin.com/in/cezanne-camacho-422823b2/).
 
