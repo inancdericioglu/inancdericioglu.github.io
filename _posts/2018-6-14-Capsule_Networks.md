@@ -205,7 +205,7 @@ I've implemented the capsule network in PyTorch code and you can find that reada
 
 ### Decoder Reconstructions
 
-The decoder sees as input the 16-dimensional vectors that are produced by the "DigitCaps" layer. There is one "correct" capsule output vector; this vector is the vector with the largest vector magnitude of all ten digit capsule outputs (recall that vector magnitude correspond to a part's existence in an image). Then, the decoder upsamples that one vector, decoding it into a reconstructed image of a handwritten digit. So, the decoder is learning a mapping from a capsule output vector to a 784-dim vector that can be reshaped into a 28x28 reconstructed image. You can see some sample reconstructions, below. The original images are on the top row, and their reconstructions are in the row below; you can see that the reconstructions are blurrier but, generally, quite good.
+The decoder sees as input the 16-dimensional vectors that are produced by the DigitCaps layer. There is one "correct" capsule output vector; this vector is the vector with the largest vector magnitude of all ten digit capsule outputs (recall that vector magnitude correspond to a part's existence in an image). Then, the decoder upsamples that one vector, decoding it into a reconstructed image of a handwritten digit. So, the decoder is learning a mapping from a capsule output vector to a 784-dim vector that can be reshaped into a 28x28 reconstructed image. You can see some sample reconstructions, below. The original images are on the top row, and their reconstructions are in the row below; you can see that the reconstructions are blurrier but, generally, quite good.
 
 <p align="center" >
 <img src='/assets/capsules/reconstructions.png' width="500" />
@@ -216,7 +216,7 @@ This will be a great visualization tool and this decoder acts as a regularizatio
 
 ### Output Vector Dimensions
 
-The final capsule layer, "DigitCaps", outputs vectors of length 16. It turns out that some of these vector dimensions have learned to represent the features that make up and distinguish each class of handwritten digit, 0-9. The features that distinguish different image classes are traits like image width, skew, line thickness, and so on. In my implementation, I tried to visualize what each vector dimension represents by slightly modifying the capsule output vectors and visualizing the reconstructed images. I've highlighted some of my results below.
+The final capsule layer, DigitCaps, outputs vectors of length 16. It turns out that some of these vector dimensions have learned to represent the features that make up and distinguish each class of handwritten digit, 0-9. The features that distinguish different image classes are traits like image width, skew, line thickness, and so on. In my implementation, I tried to visualize what each vector dimension represents by slightly modifying the capsule output vectors and visualizing the reconstructed images. I've highlighted some of my results below.
 
 <p align="center" >
 <img src='/assets/capsules/perturbed_reconstructions.png' width="500" />
