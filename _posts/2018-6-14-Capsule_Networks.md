@@ -196,7 +196,7 @@ A Capsule Network can be broken down into two main parts:
 2. A fully-connected, linear decoder
 
 <p align="center" >
-<img src='/assets/capsules/complete_caps_net.png' width="500" />
+<img src='/assets/capsules/complete_caps_net.png' width="600" />
 </p>
 
 The above image was taken from the original [Capsule Network paper (Hinton et. al.)](https://arxiv.org/pdf/1710.09829.pdf). I
@@ -208,7 +208,7 @@ I've implemented the capsule network in PyTorch code and you can find that reada
 The decoder sees as input the 16-dimensional vectors that are produced by the "DigitCaps" layer. There is one "correct" capsule output vector; this vector is the vector with the largest vector magnitude of all ten digit capsule outputs (recall that vector magnitude correspond to a part's existence in an image). Then, the decoder upsamples that one vector, decoding it into a reconstructed image of a handwritten digit. So, the decoder is learning a mapping from a capsule output vector to a 784-dim vector that can be reshaped into a 28x28 reconstructed image. You can see some sample reconstructions, below. The original images are on the top row, and their reconstructions are in the row below; you can see that the reconstructions are blurrier but, generally, quite good.
 
 <p align="center" >
-<img src='/assets/capsules/reconstructions.png' width="400" />
+<img src='/assets/capsules/reconstructions.png' width="500" />
 </p>
 
 This will be a great visualization tool and this decoder acts as a regularization technique, forcing the 16-dimensional vectors to encode something about the content of an input image.
