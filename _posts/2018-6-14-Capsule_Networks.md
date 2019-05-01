@@ -73,7 +73,7 @@ Every capsule outputs a vector, **u**, with a magnitude and orientation.
 <img src="/assets/capsules/output_vector.png" alt="A capsule's output vector with a magnitude and orientation." width="500" >
 </p>
 
-* The magnitude of the vector is a value between 0 and 1 that indicates the probability that a part exists and has been detected in an image. This is a normalized function of the number of part parameters that have been detected by the neurons that make up a capsule; a nonlinear function called **squashing**.
+* The magnitude of the vector is a value between 0 and 1 that indicates the probability that a part exists and has been detected in an image. This is a normalized function of the weighted inputs to a particular a capsule; a nonlinear function called **squashing**.
 
 * The orientation of the vector represents the state of the part properties; this orientation will change if one of the part properties changes.
 
@@ -115,7 +115,7 @@ This routing process discards a lot of pixel information and it produces vastly 
 
 ### Coupling Coefficients
 
-When a capsule network is initialized, capsules are not sure which parents their outputs should go to. In fact, each capsule starts out with a list of *possible* parents that starts out as all parent capsules in the next layer. This possibility is represented by a value called the *coupling coefficient*, **c**, which is the probability that a certain capsule's output should go to a parent capsule in the next layer. Examples of coupling coefficients, written on the connecting lines between a child and its possible parent nodes, are pictured below. A child node with two possible parents will start out with equal coupling coefficients for both: 0.5.
+When a capsule network is initialized, child capsules are not sure where there outputs should go as they act as input to the next layer of parent capsules. In fact, each capsule starts out with a list of *possible* parents that starts out as all parent capsules in the next layer. This possibility is represented by a value called the *coupling coefficient*, **c**, which is the probability that a certain capsule's output should go to a parent capsule in the next layer. Examples of coupling coefficients, written on the connecting lines between a child and its possible parent nodes, are pictured below. A child node with two possible parents will start out with equal coupling coefficients for both: 0.5.
 
 <p align="center">
 <img src="/assets/capsules/coupling_coeff.png" alt="Coupling coefficients between a child capsule and two possible parents." width="400" >
@@ -127,9 +127,11 @@ The coupling coefficients across all possible parents can be pictured as a discr
 
 Dynamic routing is an iterative process that updates these coupling coefficients. The update process, performed during network training, is as follows for a single capsule:
 
-* For each possible parent, a child capsule computes a *prediction vector*, **u_hat** (^), which is a function of its output vector, **u**, times a weight matrix, **W**. 
+* A child capsule represents a part of a whole object. Each child capsule produces some output vector **u**; its magnitude represents a part's existence and its orientation represents the generalized pose of the part.
 
-* If the prediction vector has a large **dot product** with the *parent* capsule output vector, **v**, then the coupling coefficient between that parent and the child capsule increases, and the coupling coefficient between that child capsule and all other parents, decreases.
+* For each possible parent, a child capsule computes a *prediction vector*, **u_hat** (^), which is a function of its output vector, **u**, times a weight matrix, **W**. You can think of **W** as a linear transformation—a translation or rotation, for example—that relates the pose of a *part* to the pose of a larger part or whole object (ex. if a nose is pointing to the left, the whole face it is a part of is likely also pointing left). Then **u_hat** (^) is a prediction about the pose of a larger part, represented by a parent capsule.
+
+* If the prediction vector has a large **dot product** with the *parent* capsule output vector, **v**, then these vectors are said to **agree** and the coupling coefficient between *that* parent and the child capsule increases. Simultaneously, the coupling coefficient between that child capsule and all other parents, decreases.
 
 * This dot product between the parent output vector, **v**, and a prediction vector, **u_hat**, is known as a measure of capsule agreement, **a**.
 
@@ -166,7 +168,7 @@ A typical training process may include three such agreement iterations and final
 
 ### Strengths & Attention
 
-Dynamic routing can be viewed as a parallel attention mechanism that allows capsules at one level to "attend" to certain, active capsules in a previous layer and ignore others. It turns out that this routing mechanism is extremely good at identifying multiple objects even when they overlap.
+Dynamic routing can be viewed as a parallel **attention mechanism** that allows capsules at one level to "attend" to certain, active capsules in a previous layer and ignore others. It turns out that this routing mechanism is extremely good at identifying multiple objects even when they overlap.
 
 
 ---
@@ -175,7 +177,7 @@ Dynamic routing can be viewed as a parallel attention mechanism that allows caps
 
 During the training process, while figuring out appropriate coupling coefficients between child and parent capsules, a capsule network learns the spatial relationships between parts and their wholes. 
 
-For example, to recognize a face, a capsule network would need to know that a typical face has a left and right eye, and a nose and mouth below those eyes. Then, only if it sees those parts in their *expected* locations, a capsule network could put those parts together to identify a complete face.
+For example, to recognize a face, a capsule network would need to know that a typical face has a left and right eye, and a nose and mouth below those eyes. Then, only if it sees those parts in their *expected* locations and orientations, relative to one another, a capsule network could put those parts together to identify a complete face.
 
 The spatial relationships between parts can be modeled by a series of matrix multiplications, between the output of child capsules and parents, that capture the pose (the position and orientation) of each part; then a capsule network essentially checks for **agreement** between these poses. Agreement is based on the vector orientations of child and parent capsules, and when compared to the scalar outputs of a typical convolutional layer, a capsule's vector output can provide more information.
 
