@@ -201,7 +201,7 @@ A Capsule Network can be broken down into two main parts:
 <img src='/assets/capsules/complete_caps_net.png' width="600" />
 </p>
 
-The above image was taken from the original [Capsule Network paper (Hinton et. al.)](https://arxiv.org/pdf/1710.09829.pdf). I
+The above image was taken from the original [Capsule Network paper (Hinton et. al.)](https://arxiv.org/pdf/1710.09829.pdf).
 
 I've implemented the capsule network in PyTorch code and you can find that readable implementation [in my Github repository](https://github.com/cezannec/capsule_net_pytorch). In the notebook, I define and train a simple Capsule Network that aims to classify MNIST images. The notebook follows the architecture described in the original paper and tries to replicate some of the experiments, such as feature visualization, that the authors pursued. I've taken note of some model attributes that I found particularly interesting, below, and I encourage you to read through the implementation or try to run the code, locally!
 
