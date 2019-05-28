@@ -21,7 +21,7 @@ Neural networks can only learn to find patterns in numerical data and so, before
 * For all of the text data—in this case, the movie reviews—we record each of the *unique* words that appear in that dataset and record these as the **vocabulary** of our model. 
 * We encode each vocabulary word as a unique integer, called a token. Often, these tokens are assigned based on the frequency of occurrence of a word in the dataset. So, the word that appears most frequently throughout the dataset, will have the associated token: 0. For example, if the most common word was “the,” it would have the associated token value of 0. Then the next most common word will be tokenized as 1, and that process continues. 
 * In code, this word-token association is represented in a dictionary that maps each unique word to their token, integer value: `{'the': 0, 'of': 1, 'so': 2, 'then': 3, 'you': 4, … }`
-* There are often so many words in given dataset that these tokens will range from the value 0 to 100,000 or so.
+* There are often so many words in a given dataset that these tokens will range from the value 0 to 100,000 or so.
 * After assigning these tokens to individual words, we can then tokenize the entire corpus. For any document in a dataset, like a single movie review, we treat it as a list of words in a sequence. Then we use the token dictionary to convert this list of words into a list of integer values. 
 
 <p align="center">
@@ -30,7 +30,7 @@ Neural networks can only learn to find patterns in numerical data and so, before
 
 It’s important to note that these token values do not have much conventional meaning. That is, we typically think of the value 1 being close to 2 and farther from 1000. We think of the value 10 as an average of 2 and 18, as another example. However, the word tokenized as 1 is not necessary any more similar to the word tokenized as 2 than it is with a word tokenized as 1000. Typical notions of numeric distance do not tell us anything about the relationships between individual words. 
 
-So, we have to take another encoding step; ideally one that either gets rid of the numerical order of these tokens or one that represents the relationships between words. 
+So, we have to take another encoding step; ideally, one that either gets rid of the numerical order of these tokens or one that represents the relationships between words. 
 
 ### One-Hot Vectors
 
@@ -68,7 +68,7 @@ In the [code associated with this post](https://github.com/cezannec/CNN_Text_Cla
 
 ### Word2Vec and Embedded Bias
 
-One thing to note about Word2Vec, is that, in addition to learning useful similarities and semantic relationships between words, these model also learn to represent problematic relationships between words. For example, a paper on [Debiasing Word Embeddings](https://papers.nips.cc/paper/6228-man-is-to-computer-programmer-as-woman-is-to-homemaker-debiasing-word-embeddings.pdf) by Bolukbasi et al. (2016), found that the vector-relationship between "man" and "woman" was similar to the relationship between "physician" and "registered nurse" or "shopkeeper" and "housewife" in the trained, Google News Word2Vec model, which I am using in my example, implementation.
+One thing to note about Word2Vec, is that, in addition to learning useful similarities and semantic relationships between words, these model also learn to represent problematic relationships between words. For example, a paper on [Debiasing Word Embeddings](https://papers.nips.cc/paper/6228-man-is-to-computer-programmer-as-woman-is-to-homemaker-debiasing-word-embeddings.pdf) by Bolukbasi et al. (2016), found that the vector-relationship between "man" and "woman" was similar to the relationship between "physician" and "registered nurse" or "shopkeeper" and "housewife" in the trained, Google News Word2Vec model, which I am using in my example implementation.
 > "In this paper, we quantitatively demonstrate that word-embeddings contain biases in their geometry that reflect gender stereotypes present in broader society. Due to their wide-spread usage as basic features, word embeddings not only reflect such stereotypes but can also amplify them. This poses a significant risk and challenge for machine learning and its applications.”
 
 As such, it is important to note that my example code is using a Word2Vec model that has been shown to encapsulate gender stereotypes. I’d suggest reading this paper to learn about methods for debiasing word embeddings with respect to certain features; this is an ongoing area of research. Next, I will focus on using CNN’s for text classification.
@@ -78,11 +78,11 @@ As such, it is important to note that my example code is using a Word2Vec model 
 
 ## Convolutional Kernels
 
-Convolutional layers are designed to find spatial patterns in an image by sliding a small kernel window over an image. These windows are often small, perhaps 3x3 pixels in size, and each kernel cell has an associated weight. As a kernel slides over an image, pixel-by-pixel, the kernel weights are multiplied by the pixel value in the image underneath, then all the multiplied values are summed up to get an output, filtered pixel value. A detailed description of convolutional filters and convolutional neural networks can be found in [a previous post](https://cezannec.github.io/Convolutional_Neural_Networks/), if you’d like to learn more.
+Convolutional layers are designed to find spatial patterns in an image by sliding a small kernel window over an image. These windows are often small, perhaps 3x3 pixels in size, and each kernel cell has an associated weight. As a kernel slides over an image, pixel-by-pixel, the kernel weights are multiplied by the pixel value in the image underneath, then all the multiplied values are summed up to get an output, filtered pixel value. A detailed description of convolutional filters and convolutional neural networks can be found in [a previous post](https://cezannec.github.io/Convolutional_Neural_Networks/) if you’d like to learn more.
 
-In the case of text classification, a convolutional kernel will still be a sliding window, only its job is to look at embeddings for multiple words, rather than small areas of pixels in an image. The dimensions of the convolutional kernel will also have to change, according to this task. To look at sequences of word embeddings, we want a window to look at multiple word embeddings in a sequence. The kernels will no longer be square, instead it will be a wide rectangle with dimensions like 3x300 or 5x300 (assuming an embedding length of 300). 
+In the case of text classification, a convolutional kernel will still be a sliding window, only its job is to look at embeddings for multiple words, rather than small areas of pixels in an image. The dimensions of the convolutional kernel will also have to change, according to this task. To look at sequences of word embeddings, we want a window to look at multiple word embeddings in a sequence. The kernels will no longer be square, instead, they will be a wide rectangle with dimensions like 3x300 or 5x300 (assuming an embedding length of 300). 
 
-* The height of the kernel will be the number of embeddings it will see at once, similar to representing an [n-gram]() in a word model.
+* The height of the kernel will be the number of embeddings it will see at once, similar to representing an [n-gram](https://en.wikipedia.org/wiki/N-gram) in a word model.
 * The width of the kernel should span the length of an entire word embedding.
 
 <p align="center">
@@ -91,7 +91,7 @@ In the case of text classification, a convolutional kernel will still be a slidi
 
 ### Convolution over Word Sequences
 
-Let’s look at an example of what a pair (a 2-gram) of filtered word embeddings will look like. Below, we have a toy example that shows each word encoded as an embedding with 3 values, usually this will contain many more values, but this is for ease of visualization. 
+Let’s look at an example of what a pair (a 2-gram) of filtered word embeddings will look like. Below, we have a toy example that shows each word encoded as an embedding with 3 values, usually, this will contain many more values, but this is for ease of visualization. 
 
 To look at two words in this example sequence, we can use a 2x3 convolutional kernel. The kernel weights are placed on top of two word embeddings; in this case, the downwards-direction represents time, so, the word “movie” comes right after “good” in this short sequence. The kernel weights and embedding values are multiplied in pairs and then summed to get a **single output value** of 0.54.
 
@@ -135,7 +135,7 @@ Just like in a typical convolutional neural network, one convolutional kernel is
 
 ## Maxpooling over Time
 
-Now, we’ve seen how a a convolutional operation produces a feature vector that can represent local features in sequences of word embeddings. One thing to think about is how a feature vector might look when applied to an important phrase in a text source. If we are trying to classify movie reviews, and we see the phrase, “great plot,” it doesn’t matter *where* this appears in a review; it is a good indicator that this is a positive review, no matter its location in the source text. 
+Now, we’ve seen how a convolutional operation produces a feature vector that can represent local features in sequences of word embeddings. One thing to think about is how a feature vector might look when applied to an important phrase in a text source. If we are trying to classify movie reviews, and we see the phrase, “great plot,” it doesn’t matter *where* this appears in a review; it is a good indicator that this is a positive review, no matter its location in the source text. 
 
 In order to indicate the *presence* of these high-level features, we need a way to identify them in a vector, regardless of the location within the larger input sequence. One way to identify important features, no matter their location in a sequence, is to discard less-relevant, locational information. To do this, we can use a **maxpooling** operation, which forces the network to retain only the maximum value in a feature vector, which should be the most useful, local feature. 
 
@@ -165,7 +165,7 @@ I encourage you to take a look at the [complete notebook](https://nbviewer.jupyt
 5. Define and train a `SentimentCNN` model 
 6. Test the model on positive and negative reviews
 
-The example code  follows the structure outlined in the paper, [Convolutional Neural Networks for Sentence Classification](https://arxiv.org/abs/1408.5882) by Yoon Kim (2014). It shows how you can utilize convolutional layers to find patterns in sequences of word embeddings and create an effective text classifier using a CNN-based approach.
+The example code follows the structure outlined in the paper, [Convolutional Neural Networks for Sentence Classification](https://arxiv.org/abs/1408.5882) by Yoon Kim (2014). It shows how you can utilize convolutional layers to find patterns in sequences of word embeddings and create an effective text classifier using a CNN-based approach.
 
 ### `SentimentCNN`
 
