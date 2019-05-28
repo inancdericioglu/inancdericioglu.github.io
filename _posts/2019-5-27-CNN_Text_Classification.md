@@ -191,9 +191,9 @@ After this network trains, you can see how the trained model classifies some sam
 ## Further Learning
 
 As I was writing the text classification code, I found that CNNs are used to analyze sequential data in a number of ways! Here are a couple of papers and applications that I found really interesting:
-* CNN for semantic representations and search query retrieval, [paper (Microsoft)](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/www2014_cdssm_p07.pdf).
-* CNN for genetic mutation detection, [paper (Nature)](https://www.nature.com/articles/s41467-019-09027-x).
-* CNN for classifying whale sounds via spectogram [blog post (Google AI)](https://ai.googleblog.com/2018/10/acoustic-detection-of-humpback-whales.html).
+* CNN for semantic representations and search query retrieval, [[paper (Microsoft)]](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/www2014_cdssm_p07.pdf).
+* CNN for genetic mutation detection, [[paper (Nature)]](https://www.nature.com/articles/s41467-019-09027-x).
+* CNN for classifying whale sounds via spectogram, [[blog post (Google AI)]](https://ai.googleblog.com/2018/10/acoustic-detection-of-humpback-whales.html).
 
 I encourage you to read more and try to implement an application that interests you! 
 
