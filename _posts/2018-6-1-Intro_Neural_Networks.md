@@ -16,7 +16,7 @@ The first in a series about understanding how neural networks learn to separate 
 
 ## What Are Neural Networks?
 
-Neural networks are made up of neurons, sometime called nodes. One neuron is responsible for processing some input data and producing an output. This is modeled after the neurons in our brain, which process input signals and produce output signals. For a neural network that processes visual data, such as a set of images, these inputs will be either spatial information or color information. When these color components or shapes are combined, which happens inside a neuron in the form of an equation (ex. 0.5\*red and 0.5\*blue = 1\*purple), it produces an output signal that can do something like help classify the initial input!
+Neural networks are made up of neurons, sometimes called nodes. One neuron is responsible for processing some input data and producing an output. This is modeled after the neurons in our brain, which process input signals and produce output signals. For a neural network that processes visual data, such as a set of images, these inputs will be either spatial information or color information. When these color components or shapes are combined, which happens inside a neuron in the form of an equation (ex. 0.5\*red and 0.5\*blue = 1\*purple), it produces an output signal that can do something like help classify the initial input!
 
 <p align="center"> 
 <img src="/assets/intro_nn/simple_nodes.png" alt="Images of shapes and colors that make up a handwritten 6 and the color purple, respectively." width="500" >
@@ -28,7 +28,7 @@ By looking at many many combinations of both shapes and colors, a neural network
 <img src="/assets/intro_nn/nn_example.png" alt="Two images of layers that make up neural networks." >
 </p>
 
-These neural nets have some input data and some output, and in between they have many layers. The layers are made of nodes and the output of one node acts as the input of another node down the line; each of these nodes can *learn* to extract information about the colors and shapes that make up an image, and use a combination of those things to produce something like a class for an input image.
+These neural nets have some input data and some output, and in between, they have many layers. The layers are made of nodes and the output of one node acts as the input of another node down the line; each of these nodes can *learn* to extract information about the colors and shapes that make up an image, and use a combination of those things to produce something like a class for an input image.
 
 
 ---
@@ -40,7 +40,7 @@ Now, why exactly do neural networks work? This wasn’t exactly clear to me when
 > 1. Any set of data, such as a set of images, can be represented by a smaller, simpler **model**.
 > 2. A model is made of a combination of visual **features**: a few colors and/or shapes.
 
-The idea is that *if* a set of image data can be broken down into a finite set of shape and color features, then we can learn how to group and classify any image based on which of these features it contains. The big assumption here is that any set of data can be represented by a smaller model. This is true of any set of data with one exception. The only case where a set of data cannot be broken down in to a simpler mode is in the case of random data; for any other kind of data there will be some pattern that can be detected.
+The idea is that *if* a set of image data can be broken down into a finite set of shape and color features, then we can learn how to group and classify any image based on which of these features it contains. The big assumption here is that any set of data can be represented by a smaller model. This is true of any set of data with one exception. The only case where a set of data cannot be broken down into a simpler mode is in the case of random data; for any other kind of data, there will be some pattern that can be detected.
 
 
 ---
@@ -61,7 +61,7 @@ I’m going to start by looking at a smaller set of colors, as an example, red, 
 <img src="/assets/intro_nn/red_blue.png" alt="Red, blue, and purple."  width="500" >
 </p>
 
-We know that purple is a combination of red and blue and so, I can plot each of these colors on a graph that has red on one axis and blue on the other. A purely red color will fall on the red axis, and purely blue will fall only on the blue axis.
+We know that purple is a combination of red and blue and so, I can plot each of these colors on a graph that has red on one axis and blue on the other. A purely red color will fall on the red axis, and a purely blue will fall only on the blue axis.
 
 <p align="center">  
 <img src="/assets/intro_nn/red_blue_axis.png" alt="Red and blue color plot."  width="200" >
@@ -73,7 +73,7 @@ Any color that falls somewhere on this graph has some red component and some blu
 <img src="/assets/intro_nn/new_color.png" alt="Classifying a new color as red."  width="500"  >
 </p>
 
-In sorting the above pink-ish color into the red class, I’ve implied that I have some idea of what qualities separate the three color classes. In my head, I've actually constructed some thresholds. In the image below, the red and blue axes represent a measure of color strength; how strong the red and blue components of a color are. Strength is a numerical value with a range from 0-1, where 0 is the lowest and 1 is the highest saturation of a color. The thresholds I’ve thought of are at the half-strength mark. For example, any color with more that 0.5 strength for red and *less* than 0.5 strength for blue is going to be classified as red.
+In sorting the above pink-ish color into the red class, I’ve implied that I have some idea of what qualities separate the three color classes. In my head, I've actually constructed some thresholds. In the image below, the red and blue axes represent a measure of color strength; how strong the red and blue components of a color are. Strength is a numerical value with a range from 0-1, where 0 is the lowest and 1 is the highest saturation of a color. The thresholds I’ve selected are at the half-strength mark. For example, any color with more than 0.5 strength for red and *less* than 0.5 strength for blue is going to be classified as red.
 
 ### Thresholds and Separating Data
 
@@ -93,17 +93,17 @@ Keeping these 0.5 strength thresholds in mind, we can write these class-defining
 
 ### A Complete Neural Network
 
-These thresholds make up a complete neural network. For every  input color, we break it into its features: red and blue. Then perform a threshold check: is the red component stronger than 0.5? What about the blue component? For an input color, these threshold nodes have an output: no if a color does not pass or yes, if it does.
+These thresholds make up a complete neural network. For every input color, we break it into its features: red and blue. Then perform a threshold check: is the red component stronger than 0.5? What about the blue component? For an input color, these threshold nodes have an output: no if a color does not pass, or yes if it does.
 
 <p align="center">  
 <img src="/assets/intro_nn/nn_first_layer.png" alt="First layers of the color classification network."  width="300" >
 </p>
 
-I’m skipping over one detail here, which is that this input color will be seen as a series of numerical values by a computer. Most images are color images also called RGB images, with red, green, and blue color components. Any color will typically be a list of three values: one for a red value, one for green, and one for blue. So, the nodes that check for red and blue color components will be looking at those three RGB numerical values; each node will apply a function to those values that converts them into red and blue strength values.
+I’m skipping over one detail here, which is that this input color will be seen as a series of numerical values by a computer. Most images are color images also called RGB images, with red, green, and blue color components. Any color will typically be a list of three values: one for a red value, one for green, and one for blue. So, the nodes that check for red and blue color components will be looking at those three RGB numerical values; each node will apply a function to those values that convert them into red and blue strength values.
 
 #### Activation Function
 
-Neural networks really only work with numerical data and so this no or yes output will be a numerical value. In this case, we'll use a 1 for yes and a 0 for no. We can even represent a “maybe” with a value in between 0 and 1. To get a value between 0 and 1, we can apply something called an **activation function**, which is a function that processes the output of a neuron and scales an output value to fit in some range, such as the range from 0 to 1. In general, these scaled values are a really good and consistent way to measure the strength of any input or output signal and this consistency becomes really helpful when a neural network trains.
+Neural networks really only work with numerical data and so this no or yes output will be a numerical value. In this case, we'll use a 1 for yes and a 0 for no. We can even represent a “maybe” with a value between 0 and 1. To get a value between 0 and 1, we can apply something called an **activation function**, which is a function that processes the output of a neuron and scales an output value to fit in some range, such as the range from 0 to 1. In general, these scaled values are a really good and consistent way to measure the strength of any input or output signal and this consistency becomes really helpful when a neural network trains.
 
 <p align="center">  
 <img src="/assets/intro_nn/nn_activation.png" alt="Activation function applied to the output of each node."  width="300" >
@@ -137,7 +137,7 @@ This network should be able to handle new colors, those that have some blue and 
 <img src="/assets/intro_nn/process_new_color.gif" alt="Dark purple color input moving through the color classification network." width="500" >
 </p>
 
-You might be wondering why I chose these colors, and it’s because this simple example can extend to all the colors in our initial rainbow! To account for some of the warmer colors, we have to add one more feature to our model: yellow. Now, all the colors in this rainbow can be represented by combination of red, yellow, and blue strengths.
+You might be wondering why I chose these colors, and it’s because this simple example can extend to all the colors in our initial rainbow! To account for some of the warmer colors, we have to add one more feature to our model: yellow. Now, all the colors in this rainbow can be represented by a combination of red, yellow, and blue strengths.
 
 <p align="center">  
 <img src="/assets/intro_nn/rainbow_thresholds.png" alt="Thresholds and features for all the rainbow colors."  width="600" >
@@ -156,8 +156,6 @@ This extra color feature will add a dimension in how we have to separate this da
 Neural networks break up any set of training data into a smaller, simpler model that is made of features. In our rainbow example, all our features were colors. Then a network can learn how to combine those features and create thresholds/boundaries that can separate and classify any kind of data. Realistically, data is often a lot more complex than rainbow color data, but neural networks just layer separation on top of separation layer to create more complex boundaries and group all kinds of data.  
 
 If you understand that a model is made of visual features found in training data and that a neural network combines these features, using a series of thresholds, to identify any new data, **then you understand how neural networks work!**
-
-
 
 
 ---

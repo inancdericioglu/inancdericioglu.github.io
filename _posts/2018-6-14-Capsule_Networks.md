@@ -60,7 +60,7 @@ A special part property is its **existence** in an image.
 
 ### Existence
 
-We can represent a part's existence in any image by a probability value: 0 if that part is not detected and 1 if it is; a value of 0.8 indicates an 80% confidence that the part has been found in the image. For example, say we are trying to identify a cat and one part we are trying to identify is a cat's face. We could approach this task in a couple of ways. One way to find the existence of this part, in any image of a cat, is to perform a binary classification: contains-part or doesn't-contain-part, and use those class scores to get the probability of existence. Another way is to look at all of the part properties in a capsule (the width and texture of the face, the angle the face is pointing, etc.) and say that the probability of existence is a function of the number of those properties. If a face-like shape is detected and a certain width and angle are identified, these property neurons will become *active*, and we can use this activity to indicate the existence of a part. This is the approach that capsules take, and it offers a number of advantages to the binary classification approach.
+We can represent a part's existence in an image by a probability value: 0 if that part is not detected and 1 if it is; a value of 0.8 indicates an 80% confidence that the part has been found in the image. For example, say we are trying to identify a cat and one part we are trying to identify is a cat's face. We could approach this task in a couple of ways. One way to find the existence of this part, in an image of a cat, is to perform a binary classification: contains-part or doesn't-contain-part, and use those class scores to get the probability of existence. Another way is to look at all of the part properties in a capsule (the width and texture of the face, the angle the face is pointing, etc.) and say that the probability of existence is a function of the number of those properties. If a face-like shape is detected and a certain width and angle are identified, these property neurons will become *active*, and we can use this activity to indicate the existence of a part. This is the approach that capsules take, and it offers a number of advantages to the binary classification approach.
 
 ### Output Vector
 
@@ -115,7 +115,7 @@ This routing process discards a lot of pixel information and it produces vastly 
 
 ### Coupling Coefficients
 
-When a capsule network is initialized, child capsules are not sure where there outputs should go as they act as input to the next layer of parent capsules. In fact, each capsule starts out with a list of *possible* parents that starts out as all parent capsules in the next layer. This possibility is represented by a value called the *coupling coefficient*, **c**, which is the probability that a certain capsule's output should go to a parent capsule in the next layer. Examples of coupling coefficients, written on the connecting lines between a child and its possible parent nodes, are pictured below. A child node with two possible parents will start out with equal coupling coefficients for both: 0.5.
+When a capsule network is initialized, child capsules are not sure where their outputs should go as they act as input to the next layer of parent capsules. In fact, each capsule starts out with a list of *possible* parents, which is all the parent capsules in the next layer. This possibility is represented by a value called the *coupling coefficient*, **c**, which is the probability that a certain capsule's output should go to a parent capsule in the next layer. Examples of coupling coefficients, written on the connecting lines between a child and its possible parent nodes, are pictured below. A child node with two possible parents will start out with equal coupling coefficients for both: 0.5.
 
 <p align="center">
 <img src="/assets/capsules/coupling_coeff.png" alt="Coupling coefficients between a child capsule and two possible parents." width="400" >
@@ -131,7 +131,7 @@ Dynamic routing is an iterative process that updates these coupling coefficients
 
 * For each possible parent, a child capsule computes a *prediction vector*, **u_hat** (^), which is a function of its output vector, **u**, times a weight matrix, **W**. You can think of **W** as a linear transformation—a translation or rotation, for example—that relates the pose of a *part* to the pose of a larger part or whole object (ex. if a nose is pointing to the left, the whole face it is a part of is likely also pointing left). Then **u_hat** (^) is a prediction about the pose of a larger part, represented by a parent capsule.
 
-* If the prediction vector has a large **dot product** with the *parent* capsule output vector, **v**, then these vectors are said to **agree** and the coupling coefficient between *that* parent and the child capsule increases. Simultaneously, the coupling coefficient between that child capsule and all other parents, decreases.
+* If the prediction vector has a large **dot product** with the *parent* capsule output vector, **v**, then these vectors are said to **agree** and the coupling coefficient between *that* parent and the child capsule increases. Simultaneously, the coupling coefficient between that child capsule and all other parents decreases.
 
 * This dot product between the parent output vector, **v**, and a prediction vector, **u_hat**, is known as a measure of capsule agreement, **a**.
 
@@ -145,7 +145,7 @@ Dynamic routing is an iterative process that updates these coupling coefficients
 
 This is sometimes referred to as *top-down* feedback; feedback from a later layer of parent capsule outputs. 
 
-The dot product between two vectors is a single value that can be thought of as a measure of orientation similarity or alignment. Consider the two vectors, **a** and **b**, below. The dot product between **a** and **b** is calculated as their magnitudes times the cosine of the angle, alpha, between them: a\*b\*cos(alpha). Cosine is at a maximum value (1) if the two vectors have no angle difference between them, and is at a minimum (0) when the two vectors have a right-angle difference between them. In the example below, the dot product is calculated for two vectors with an alpha equal to 35 degrees.
+The dot product between two vectors is a single value that can be thought of as a measure of orientation similarity or alignment. Consider the two vectors, **a** and **b**, below. The dot product between **a** and **b** is calculated as their magnitudes times the cosine of the angle, alpha, between them: a\*b\*cos(alpha). Cosine is at a maximum value (1) if the two vectors have no angle difference between them, and is at a minimum (0) when the two vectors have a right-angle difference between them. In the example below, the dot product is calculated for two vectors with alpha equal to 35 degrees.
 
 <p align="center">
 <img src="/assets/capsules/dot_prod_ex.png" alt="Dot product between two vectors, a and b. 0.8*0.5*cos(35 degrees) = 0.328." width="400" >
@@ -153,7 +153,7 @@ The dot product between two vectors is a single value that can be thought of as 
 
 A high coupling coefficient, between a child and parent capsule, increases the contribution of the child to that parent, thus *further* aligning their two output vectors and making their agreement dot product even larger! 
 
-This is called **routing by agreement**. If the orientation of the output vectors of capsules in successive layers are aligned, then they agree that they should be coupled, and the connections between them are strengthened. The coupling coefficients are calculated by a [softmax function](https://en.wikipedia.org/wiki/Softmax_function) that operates on the agreements, **a**, between capsules and turns them into probabilities such that the coefficients between one child and its possible parents sum to 1. 
+This is called **routing by agreement**. If the orientation of the output vectors of capsules in successive layers are aligned, then they agree that they should be coupled, and the connections between them are strengthened. The coupling coefficients are calculated by a [softmax function](https://en.wikipedia.org/wiki/Softmax_function) that operates on the agreements, **a**, between capsules and turns them into probabilities such that the coefficients between one child, and its possible parents, sum to 1. 
 
 <p align="center">
 <img src="/assets/capsules/dynamic_routing.gif" alt="Dynamic routing." width="600" >
@@ -207,7 +207,7 @@ I've implemented the capsule network in PyTorch code and you can find that reada
 
 ### Decoder Reconstructions
 
-The decoder sees as input the 16-dimensional vectors that are produced by the DigitCaps layer. There is one "correct" capsule output vector; this vector is the vector with the largest vector magnitude of all ten digit capsule outputs (recall that vector magnitude correspond to a part's existence in an image). Then, the decoder upsamples that one vector, decoding it into a reconstructed image of a handwritten digit. So, the decoder is learning a mapping from a capsule output vector to a 784-dim vector that can be reshaped into a 28x28 reconstructed image. You can see some sample reconstructions, below. The original images are on the top row, and their reconstructions are in the row below; you can see that the reconstructions are blurrier but, generally, quite good.
+The decoder sees as input the 16-dimensional vectors that are produced by the DigitCaps layer. There is one "correct" capsule output vector; this vector is the vector with the largest vector magnitude of all ten digit capsule outputs (recall that vector magnitude corresponds to a part's existence in an image). Then, the decoder upsamples that one vector, decoding it into a reconstructed image of a handwritten digit. So, the decoder is learning a mapping from a capsule output vector to a 784-dim vector that can be reshaped into a 28x28 reconstructed image. You can see some sample reconstructions, below. The original images are on the top row, and their reconstructions are in the row below; you can see that the reconstructions are blurrier but, generally, quite good.
 
 <p align="center" >
 <img src='/assets/capsules/reconstructions.png' width="500" />
@@ -218,7 +218,7 @@ This will be a great visualization tool and this decoder acts as a regularizatio
 
 ### Output Vector Dimensions
 
-The final capsule layer, DigitCaps, outputs vectors of length 16. It turns out that some of these vector dimensions have learned to represent the features that make up and distinguish each class of handwritten digit, 0-9. The features that distinguish different image classes are traits like image width, skew, line thickness, and so on. In my implementation, I tried to visualize what each vector dimension represents by slightly modifying the capsule output vectors and visualizing the reconstructed images. I've highlighted some of my results below.
+The final capsule layer, DigitCaps, outputs vectors of length 16. It turns out that some of these vector dimensions have learned to represent the features that makeup and distinguish each class of handwritten digit, 0-9. The features that distinguish different image classes are traits like image width, skew, line thickness, and so on. In my implementation, I tried to visualize what each vector dimension represents by slightly modifying the capsule output vectors and visualizing the reconstructed images. I've highlighted some of my results below.
 
 <p align="center" >
 <img src='/assets/capsules/perturbed_reconstructions.png' width="500" />

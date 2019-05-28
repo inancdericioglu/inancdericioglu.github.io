@@ -20,7 +20,7 @@ Wearable sensor technology has been investigated as a way to regularly monitor a
 
 This follows the guidelines of the Physiological Data Modeling Contest (PDMC) contest, and you can read more about this data and the challenge in [the project paper]({{ site.url }}/assets/activity_recognition.pdf).
 
-To approach this challenge, we compared unsupervised learning algorithms with supervised approaches. Our hypothesis was: a supervised algorithm would produce the most accurate test results, but a good, unsupervised algorithm would be ideal, since it is time-intensive to create richly-labeled data for training.
+To approach this challenge, we compared unsupervised learning algorithms with supervised approaches. Our hypothesis was: a supervised algorithm would produce the most accurate test results, but a good, unsupervised algorithm would be ideal since it is time-intensive to create richly-labeled data for training.
 
 <p align="center"> 
 <img src="/assets/activity_rec.png" alt="LDA separated data into three classes: sleeping, watching TV, or other." >
@@ -28,7 +28,7 @@ To approach this challenge, we compared unsupervised learning algorithms with su
 
 **Linear Discriminant Analysis**
 
-In the image above, you can see an example of data separation done with linear discriminant analysis (LDA), which is a supervised learning model. The original data features included several different types of collected, sensor data; acceleration, heat flux, body temperature, and so on. In this case, LDA was trained on some training data and used as a feature reduction technique, which squashed the original features into 2D space while trying to maintain the greatest possible separation between classes. We decomposed the data into two new LDA components (linear combinations of the original features), and could then visualize these class groupings in space. You can see separation between sleeping and other activity classes, but watching TV gets obscured.
+In the image above, you can see an example of data separation done with linear discriminant analysis (LDA), which is a supervised learning model. The original data features included several different types of collected, sensor data; acceleration, heat flux, body temperature, and so on. In this case, LDA was trained on some training data and used as a feature reduction technique, which squashed the original features into 2D space while trying to maintain the greatest possible separation between classes. We decomposed the data into two new LDA components (linear combinations of the original features), and could then visualize these class groupings in space. You can see the separation between sleeping and other activity classes, but watching TV gets obscured.
 
 We did get the best performance using supervised algorithms, but this project did get me thinking about how unsupervised approaches might be improved.
 
@@ -46,7 +46,7 @@ Cell detection and counting in the context of biology research is largely a labo
 
 **Graph Construction**
 
-To perform graph-mining, we constructed a graph that separated individual cells based on patterns of intensity in a given image. A cell nucleus was very bright, but its edges and the background were darker. So, in this approach, each cell in an image is modeled as a smooth 2D function that has a single local maxima in its neighborhood. We used this model to perform histogram segmentation.
+To perform graph-mining, we constructed a graph that separated individual cells based on patterns of intensity in a given image. A cell nucleus was very bright, but its edges and the background were darker. So, in this approach, each cell in an image is modeled as a smooth 2D function that has a single local maximum in its neighborhood. We used this model to perform histogram segmentation.
 
 <p align="center"> 
 <img src="/assets/hist_segmentation.png" alt="Cells segmented into different areas by brightness." >
@@ -71,13 +71,13 @@ This project uses pairs of photos taken by an endoscope at slightly different de
 <img src="/assets/depth_map.png" alt="Depth image of a simulated image of a metronome." >
 </p>
 
-SIFT was used to create feature descriptors for two endoscopic images, taken at different depths. Using the SIFT descriptors, we identified the best-matching points in the pair of images and used those to calculate a transformation between the two images. From this transformation we extracted an estimation for the distance between the end of the endoscope and the objects in the images.
+SIFT was used to create feature descriptors for two endoscopic images, taken at different depths. Using the SIFT descriptors, we identified the best-matching points in the pair of images and used those to calculate a transformation between the two images. From this transformation, we extracted an estimation for the distance between the end of the endoscope and the objects in the images.
 
 ---
 
 ## Project 4: DNA-Based Logic Gates
 
-In my research as an undergraduate, I studied the construction of and uses cases for DNA-based logic gates. These gates rely on the predictable base-pairing of DNA to operate (A-T, C-G) and emulate the behavior of traditional logic gates: producing an output signal, given an input. The flow of a simple gate is pictured below, where A and A* are complimentary strands of DNA. The gate wants to reach an equilibrium state in which all strands are perfectly paired with their match (ex. t-A is paired with t\*-A\*), and to reach this state, some displacement occurs.
+In my research as an undergraduate, I studied the construction of and uses cases for DNA-based logic gates. These gates rely on the predictable base-pairing of DNA to operate (A-T, C-G) and emulate the behavior of traditional logic gates: producing an output signal, given an input. The flow of a simple gate is pictured below, where A and A* are complementary strands of DNA. The gate wants to reach an equilibrium state in which all strands are perfectly paired with their match (ex. t-A is paired with t\*-A\*), and to reach this state, some displacement occurs.
 
 
 <p align="center"> 

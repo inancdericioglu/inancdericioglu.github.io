@@ -15,7 +15,7 @@ Image classification is a challenging task for computers. Convolutional neural n
 
 ## Neural Network Structure
 
-This post is the second in a series about understanding how neural networks learn to separate and classify visual data. In the [last post](https://cezannec.github.io/Intro_Neural_Networks/), I went over why neural networks work: they rely on the fact that most data can be represented by a smaller, simpler set of features. Neural networks are made of many nodes that learn how to best separate training data into classes, or other specified groups, and many layers of nodes can create more and more complex boundaries for separating and grouping this data.
+This post is the second in a series about understanding how neural networks learn to separate and classify visual data. In the [last post](https://cezannec.github.io/Intro_Neural_Networks/), I went over why neural networks work: they rely on the fact that most data can be represented by a smaller, simpler set of features. Neural networks are made of many nodes that learn how to best separate training data into classes or other specified groups, and many layers of nodes can create more and more complex boundaries for separating and grouping this data.
 
 <p align="center">  
 <img src="/assets/intro_nn/complete_nn.png" alt="Complete neural network."  width="500" >
@@ -36,7 +36,7 @@ It's simple for us to look at this image and identify the car, but when we give 
 
 ### Images as Grids of Pixels
 
-An image is seen by a neural network (and by computers) as a grid of numerical values. Below, you'll see a zoomed in portion of a grayscale image of a car. The image is broken up into a fine grid, and each of the grid cells is called a pixel. For grayscale images, each pixel has a value between 0 and 255, where 0 is black and 255 is white; shades of gray are anywhere in between.
+An image is seen by a neural network (and by computers) as a grid of numerical values. Below, you'll see a zoomed-in portion of a grayscale image of a car. The image is broken up into a fine grid, and each of the grid cells is called a pixel. For grayscale images, each pixel has a value between 0 and 255, where 0 is black and 255 is white; shades of gray are anywhere in between.
 
 <p align="center">  
 <img src="/assets/cnn_intro/grayscale_image.png" alt="Grayscale pixel values 0-255."  width="400" >
@@ -48,7 +48,7 @@ For a standard color image, there are red, green, and blue pixel values for each
 <img src="/assets/cnn_intro/color_image.png" alt="Color image in x-y space, with a depth of 3 for 3 RGB color channels."  width="600" >
 </p>
 
-To creat an image classifier, we need an algorithm that can look at these pixel values and classify this image as a car. We also want a classifier to be able to detect this car under varying ight conditions (at night or during a sunny day), and we want the classifier to generalize well, so that it can recognize a variety of cars in different environments and in different poses.
+To create an image classifier, we need an algorithm that can look at these pixel values and classify this image as a car. We also want a classifier to be able to detect this car under varying light conditions (at night or during a sunny day), and we want the classifier to generalize well so that it can recognize a variety of cars in different environments and in different poses.
 
 <p align="center">  
 <img src="/assets/cnn_intro/var_cars.png" alt="Variety of images of a car in different scenarios."  width="600" >
@@ -85,7 +85,7 @@ Every CNN is made up of multiple layers, the three main types of layers are conv
 
 ### Convolutional Layer
 
-The convolutional layer can be though of as the *feature extractor* of this network, it learns to find spatial features in an input image. This layer is produced by applying a series of many different image filters, also known as convolutional kernels, to an input image. These filters a very small grids of values that slide over an image pixel-by-pixel, and produce a filtered output image that will be about the same size as the input image. Multiple kernels will produce multiple filtered, output images.
+The convolutional layer can be thought of as the *feature extractor* of this network, it learns to find spatial features in an input image. This layer is produced by applying a series of many different image filters, also known as convolutional kernels, to an input image. These filters are very small grids of values that slide over an image, pixel-by-pixel, and produce a filtered output image that will be about the same size as the input image. Multiple kernels will produce multiple filtered, output images.
 
 <p align="center">
 <img src="/assets/cnn_intro/conv_layer.gif" alt="Convolutional layer made of multiple filters." width="500" >
@@ -106,9 +106,9 @@ Let’s take a closer look at one type of convolutional kernel: a high-pass imag
 
 For example, if we put an image of a car through a high-pass filter, we expect the edges of the car, where the pixel values change abruptly from light to dark, to be detected. The edges of objects are often areas of abrupt intensity change and, for this reason, high-pass filters are sometimes called "edge detection filters."
 
-#### Convolution Kernels
+#### Convolutional Kernels
 
-The filters I’ll be talking about are in the form of matrices, often called convolution kernels, which are just grids of numbers that modify an image. Below is an example of high-pass filter, a 3x3 kernel that does edge detection.
+The filters I’ll be talking about are in the form of matrices, also called convolutional kernels, which are just grids of numbers that modify an image. Below is an example of a high-pass filter, a 3x3 kernel that does edge detection.
 
 <p align="center">
 <img src="/assets/cnn_intro/edge_detection_filter.png" alt="3x3 edge detection filter with row values [0,-1,0], [-1,4,-1], [0,-1,0]." width="200" >
@@ -124,8 +124,7 @@ To apply this filter to an image, an input image, F(x,y), is convolved with the 
 <img src="/assets/cnn_intro/filter_in_action.gif" alt="Filter passing over an image of a car." width="500" >
 </p>
 
-I’ll walk through a specific example, using the 3x3 edge detection filter.
- To better see the pixel-level operations, I’ll zoom in on the image of the car. 
+I’ll walk through a specific example, using the 3x3 edge detection filter. To better see the pixel-level operations, I’ll zoom in on the image of the car. 
 
 <p align="center">
 <img src="/assets/cnn_intro/zoomed_corner.png" alt="Zoomed in pixel area near the top-right edge of the car." width="600" >
@@ -138,7 +137,7 @@ For every pixel in this grayscale image, we place our kernel over it, so that th
 </p>
 
 The steps for a complete convolution are as follows:
-1. Multiply the values in the kernel with their matching pixel value. So, value in the top left of the 3x3 kernel (0), will be multiplied by the pixel value in that *same* corner in our image area (150).
+1. Multiply the values in the kernel with their matching pixel value. So, the value in the top left of the 3x3 kernel (0), will be multiplied by the pixel value in that *same* corner in our image area (150).
 2. Sum all these multiplied pairs of values to get a new value, in this case, 175. This value will be the new pixel value in the filtered output image, at the same (x,y) location as the selected center pixel.
 
 <p align="center">
@@ -159,13 +158,13 @@ The kernel also contains negative weights with a value of -1. These correspond t
 
 #### Image Borders
 
-The only pixels for which convolution doesn't work are the pixels at the borders of an image. A 3x3 kernel cannot be perfectly placed over a center pixel at the edges or corners of an image. In practice, there are a few of ways of dealing with this, the most common ways are to either pad this image with a border of 0’s (or another grayscale value) so that we can perfectly overlay a kernel on all the pixel values in the original image, or to ignore the pixel values at the borders of the image, and only look at pixels where we can completely overlay the 3x3 convolutional kernel.
+The only pixels for which convolution doesn't work are the pixels at the borders of an image. A 3x3 kernel cannot be perfectly placed over a center pixel at the edges or corners of an image. In practice, there are a few ways of dealing with this, the most common ways are to either pad this image with a border of 0’s (or another grayscale value) so that we can perfectly overlay a kernel on all the pixel values in the original image, or to ignore the pixel values at the borders of the image, and only look at pixels where we can completely overlay the 3x3 convolutional kernel.
 
 <p align="center">
 <img src="/assets/cnn_intro/edge_handling.gif" alt="Convolutional kernel, moving to the edges of an image, where it cannot entirely cover the pixels." width="500" >
 </p>
 
-Often, there is not a lot of useful information at the border of an image, but if you do choose to ignore this information, every filtered image will be just a little bit smaller that the original input image. For a 3x3 kernel, we’ll actually lose a pixel from each side of an image, resulting in a filtered output that is two pixels smaller in width and in height than the original image. You can also choose to make larger filters. 3x3 is one of the smallest sizes and it’s good for looking at small pixel areas, but if you are analyzing larger images you may want to increase the area and use kernels that are 5x5, 7x7, or larger. Usually, you want an odd number so that the kernel nicely overlays a center pixel.
+Often, there is not a lot of useful information at the border of an image, but if you do choose to ignore this information, every filtered image will be just a little bit smaller than the original input image. For a 3x3 kernel, we’ll actually lose a pixel from each side of an image, resulting in a filtered output that is two pixels smaller in width and in height than the original image. You can also choose to make larger filters. 3x3 is one of the smallest sizes and it’s good for looking at small pixel areas, but if you are analyzing larger images you may want to increase the area and use kernels that are 5x5, 7x7, or larger. Usually, you want an odd number so that the kernel nicely overlays a center pixel.
 
 <p align="center">
 <img src="/assets/cnn_intro/horizontal_filter.png" alt="3x3 horizontal edge detection filter." width="500" >
@@ -184,7 +183,7 @@ So, these convolutional kernels, when applied to an image, make a filtered image
 
 ## Activation Function 
 
-Recall that grayscale images have pixels values that fall in a range from 0-255. However, neural networks work best with scaled "strength" values between 0 and 1 (we briefly mentioned this in the last post). So, in practice, the input image to a CNN is a grayscale image with pixel values between 0 (black) and 1 (white); a light gray is be a value like 0.78. Converting an image from a pixel value range of 0-255 to a range of 0-1 is called **normalization**. Then, this normalized input image is filtered and a convolutional layer is created. Every pixel value in a filtered image, created by a convolution operation, will fall in a different range; there may even be pixel values that are negative.
+Recall that grayscale images have pixels values that fall in a range from 0-255. However, neural networks work best with scaled "strength" values between 0 and 1 (we briefly mentioned this in the last post). So, in practice, the input image to a CNN is a grayscale image with pixel values between 0 (black) and 1 (white); a light gray may be a value like 0.78. Converting an image from a pixel value range of 0-255 to a range of 0-1 is called **normalization**. Then, this normalized input image is filtered and a convolutional layer is created. Every pixel value in a filtered image, created by a convolution operation, will fall in a different range; there may even be pixel values that are negative.
 
 To account for this change in pixel value, following a convolutional layer, a CNN applies an **activation function** that transforms each pixel value. 
 
@@ -212,7 +211,7 @@ Let’s zoom in even further on four of these patches. A maxpooling layer is def
 <img src="/assets/cnn_intro/stride.gif" alt="Maxpooling 2x2 stride box moving over a 4x4 image with no overlap." width="400" >
 </p>
 
-For each 2x2 patch, a maxpooling layer looks at each value in a patch and selects only the maximum value. In the red patch it selects 140, in the yellow, 90, and so on, until we are left with four values from the four patches.
+For each 2x2 patch, a maxpooling layer looks at each value in a patch and selects only the maximum value. In the red patch, it selects 140, in the yellow, 90, and so on, until we are left with four values from the four patches.
 
 <p align="center">
 <img src="/assets/cnn_intro/maxpool.png" alt="2x2 pixel patches." width="500" >
@@ -220,9 +219,9 @@ For each 2x2 patch, a maxpooling layer looks at each value in a patch and select
 
 Now, you might be wondering why we would use a maxpooling layer in the first place, especially since this layer is discarding pixel information. We use a maxpooling layer for a few reasons. 
 
-First, **dimensionality reduction**; as an input image moves forward through a CNN, we are taking a fairly flat image in x-y space and expanding its depth dimension while decreasing its height and width. The network distills information about the content of an image and squishes it into a representation that will make up a reasonable number of inputs that can be seen by a fully-connected layer. Second, maxpooling makes a network resistant to small pixel value changes in an input image. Imagine that some of the pixel values in a small patch are a little bit brighter or darker or that an object has moved to the right by a few pixels. For similar images, even if a patch has some slightly different pixel values, the maximum values extracted in successive pooling layers, should be the similar. Third, by reducing the width and height of image data as it moves forward through the CNN, the maxpooling layer **mimics an increase in the field of view** for later layers. For example, a 3x3 kernel placed over an original input image will see a 3x3 pixel area at once, but that same kernel, applied to a pooled version of the original input image (ex. an image reduced in width and height by a factor of 2), will see the same number of pixels, but the 3x3 area corresponds to a 2x larger area in the *original* input image. This allows later convolutional layers to detect features in a larger region of the input image. 
+First, **dimensionality reduction**; as an input image moves forward through a CNN, we are taking a fairly flat image in x-y space and expanding its depth dimension while decreasing its height and width. The network distills information about the content of an image and squishes it into a representation that will make up a reasonable number of inputs that can be seen by a fully-connected layer. Second, maxpooling makes a network resistant to small pixel value changes in an input image. Imagine that some of the pixel values in a small patch are a little bit brighter or darker or that an object has moved to the right by a few pixels. For similar images, even if a patch has some slightly different pixel values, the maximum values extracted in successive pooling layers, should be similar. Third, by reducing the width and height of image data as it moves forward through the CNN, the maxpooling layer **mimics an increase in the field of view** for later layers. For example, a 3x3 kernel placed over an original input image will see a 3x3 pixel area at once, but that same kernel, applied to a pooled version of the original input image (ex. an image reduced in width and height by a factor of 2), will see the same number of pixels, but the 3x3 area corresponds to a 2x larger area in the *original* input image. This allows later convolutional layers to detect features in a larger region of the input image. 
 
-There are also other kinds of networks that do *not* use maxpooling, such as Capsule Networks, but that is a post for another day!
+There are also other kinds of networks that do *not* use maxpooling, such as Capsule Networks, which you can read about in a [separate blog post](https://cezannec.github.io/Capsule_Networks/).
 
 
 ---
