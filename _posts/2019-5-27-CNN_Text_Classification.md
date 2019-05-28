@@ -3,7 +3,7 @@ layout: post
 title: CNNs for Text Classification
 ---
 
-How can convolutional filters, which are designed to find spatial patterns, work for pattern-finding in sequences of words? This post will discuss how convolutional neural networks can be used to do text classification, specifically, classifying the sentiment (positive or negative) of movie reviews.
+How can convolutional filters, which are designed to find spatial patterns, work for pattern-finding in sequences of words? This post will discuss how convolutional neural networks can be used to find general patterns in text and perform text classification. The end of this post specifically addresses training a CNN to classify the sentiment (positive or negative) of movie reviews.
 <p align="center">
 <img src="/assets/cnn_text/conv_kernel_two_texts.gif" alt="Two similar phrases producing a similar convolutional output value." width="600" >
 </p>
