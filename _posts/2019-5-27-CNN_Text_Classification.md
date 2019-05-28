@@ -25,7 +25,7 @@ Neural networks can only learn to find patterns in numerical data and so, before
 * After assigning these tokens to individual words, we can then tokenize the entire corpus. For any document in a dataset, like a single movie review, we treat it as a list of words in a sequence. Then we use the token dictionary to convert this list of words into a list of integer values. 
 
 <p align="center">
-<img src="/assets/cnn_text/token_dictionary.png" alt="A dictionary that maps unique words to integer tokens." width="600" >
+<img src="/assets/cnn_text/token_dictionary.png" alt="A dictionary that maps unique words to integer tokens." width="650" >
 </p>
 
 It’s important to note that these token values do not have much conventional meaning. That is, we typically think of the value 1 being close to 2 and farther from 1000. We think of the value 10 as an average of 2 and 18, as another example. However, the word tokenized as 1 is not necessary any more similar to the word tokenized as 2 than it is with a word tokenized as 1000. Typical notions of numeric distance do not tell us anything about the relationships between individual words. 
@@ -37,7 +37,7 @@ So, we have to take another encoding step; ideally, one that either gets rid of 
 A common encoding step is to **one-hot encode** each token; representing each word as a vector that has as many values in it as there are words in the vocabulary. That is, each column in a vector represents one possible word in a vocabulary. The vector is filled with 0’s except for the index at that word’s token value, say index 0 for “the”.
 
 <p align="center">
-<img src="/assets/cnn_text/onehot.png" alt="Examples of one-hot vectors, the has a 1 at index=0." width="600" >
+<img src="/assets/cnn_text/onehot.png" alt="Examples of one-hot vectors, the has a 1 at index=0." width="550" >
 </p>
 
 For large vocabularies, these vectors can get very long, and they contain all 0’s except for one value. This is considered a very **sparse** representation.
@@ -47,7 +47,7 @@ For large vocabularies, these vectors can get very long, and they contain all 0�
 We often want a more **dense** representation. One such representation is a learned word vector, known as an embedding. Word embeddings are vectors of a specified length, typically on the order of 100, and each vector of 100 or so values, represents one word. The values in each column represent the features of a word, rather than any specific word.
 
 <p align="center">
-<img src="/assets/cnn_text/word_embeddings.png" alt="Examples of shorter, word embeddings." width="500" >
+<img src="/assets/cnn_text/word_embeddings.png" alt="Examples of shorter, word embeddings." width="450" >
 </p>
 
 These embeddings are formed in an unsupervised manner by training a single-layer neural network—a **Word2Vec** model—on an input word and a few surrounding words in a sentence.
