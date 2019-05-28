@@ -5,7 +5,7 @@ title: CNNs for Text Classification
 
 How can convolutional filters, which are designed to find spatial patterns, work for pattern-finding in sequences of words? This post will discuss how convolutional neural networks can be used to do text classification, specifically, classifying the sentiment (positive or negative) of movie reviews.
 <p align="center">
-<img src="/assets/cnn_text/conv_kernel_two_texts.gif" alt="Two similar phrases producing a similar convolutional output value." width="500" >
+<img src="/assets/cnn_text/conv_kernel_two_texts.gif" alt="Two similar phrases producing a similar convolutional output value." width="600" >
 </p>
 
 <!--more-->
@@ -25,7 +25,7 @@ Neural networks can only learn to find patterns in numerical data and so, before
 * After assigning these tokens to individual words, we can then tokenize the entire corpus. For any document in a dataset, like a single movie review, we treat it as a list of words in a sequence. Then we use the token dictionary to convert this list of words into a list of integer values. 
 
 <p align="center">
-<img src="/assets/cnn_text/token_dictionary.png" alt="A dictionary that maps unique words to integer tokens." width="500" >
+<img src="/assets/cnn_text/token_dictionary.png" alt="A dictionary that maps unique words to integer tokens." width="600" >
 </p>
 
 It’s important to note that these token values do not have much conventional meaning. That is, we typically think of the value 1 being close to 2 and farther from 1000. We think of the value 10 as an average of 2 and 18, as another example. However, the word tokenized as 1 is not necessary any more similar to the word tokenized as 2 than it is with a word tokenized as 1000. Typical notions of numeric distance do not tell us anything about the relationships between individual words. 
@@ -37,7 +37,7 @@ So, we have to take another encoding step; ideally, one that either gets rid of 
 A common encoding step is to **one-hot encode** each token; representing each word as a vector that has as many values in it as there are words in the vocabulary. That is, each column in a vector represents one possible word in a vocabulary. The vector is filled with 0’s except for the index at that word’s token value, say index 0 for “the”.
 
 <p align="center">
-<img src="/assets/cnn_text/onehot.png" alt="Examples of one-hot vectors, the has a 1 at index=0." width="400" >
+<img src="/assets/cnn_text/onehot.png" alt="Examples of one-hot vectors, the has a 1 at index=0." width="600" >
 </p>
 
 For large vocabularies, these vectors can get very long, and they contain all 0’s except for one value. This is considered a very **sparse** representation.
@@ -47,7 +47,7 @@ For large vocabularies, these vectors can get very long, and they contain all 0�
 We often want a more **dense** representation. One such representation is a learned word vector, known as an embedding. Word embeddings are vectors of a specified length, typically on the order of 100, and each vector of 100 or so values, represents one word. The values in each column represent the features of a word, rather than any specific word.
 
 <p align="center">
-<img src="/assets/cnn_text/word_embeddings.png" alt="Examples of shorter, word embeddings." width="300" >
+<img src="/assets/cnn_text/word_embeddings.png" alt="Examples of shorter, word embeddings." width="500" >
 </p>
 
 These embeddings are formed in an unsupervised manner by training a single-layer neural network—a **Word2Vec** model—on an input word and a few surrounding words in a sentence.
@@ -86,7 +86,7 @@ In the case of text classification, a convolutional kernel will still be a slidi
 * The width of the kernel should span the length of an entire word embedding.
 
 <p align="center">
-<img src="/assets/cnn_text/conv_dimensions.png" alt="A 2x3 convolutional kernel." width="400" >
+<img src="/assets/cnn_text/conv_dimensions.png" alt="A 2x3 convolutional kernel." width="500" >
 </p>
 
 ### Convolution over Word Sequences
@@ -96,7 +96,7 @@ Let’s look at an example of what a pair (a 2-gram) of filtered word embeddings
 To look at two words in this example sequence, we can use a 2x3 convolutional kernel. The kernel weights are placed on top of two word embeddings; in this case, the downwards-direction represents time, so, the word “movie” comes right after “good” in this short sequence. The kernel weights and embedding values are multiplied in pairs and then summed to get a **single output value** of 0.54.
 
 <p align="center">
-<img src="/assets/cnn_text/conv_kernel_operation.gif" alt="Convolutional output from convolving a pair of sequential words." width="500" >
+<img src="/assets/cnn_text/conv_kernel_operation.gif" alt="Convolutional output from convolving a pair of sequential words." width="600" >
 </p>
 
 A convolutional neural network will include many of these kernels, and, as the network trains, these kernel weights are learned. Each kernel is designed to look at a word, and surrounding word(s) in a sequential window, and output a value that captures something about that phrase. In this way, the convolution operation can be viewed as **window-based feature extraction**, where the features are patterns in sequential word groupings that indicate traits like the sentiment of a text, the grammatical function of different words, and so on. 
@@ -110,7 +110,7 @@ There is another nice property of this convolutional operation. Recall that simi
 In the below example, you can see that the convolutional output value for the input 2-grams “good movie” and “fantastic song” are about the same because the word embeddings for those pairs of words are also very similar. 
 
 <p align="center">
-<img src="/assets/cnn_text/similar_phrases_conv_out.png" alt="Two similar phrases producing a similar convolutional output value." width="500" >
+<img src="/assets/cnn_text/similar_phrases_conv_out.png" alt="Two similar phrases producing a similar convolutional output value." width="600" >
 </p>
 
 In this example, the convolutional kernel has learned to capture a more general feature; not just a good movie or song, but a _positive_ thing, generally. Recognizing these kinds of high-level features can be especially useful in text classification tasks, which often rely on general groupings. For example, in sentiment analysis, a model would benefit from being able to represent negative, neutral, and positive word groupings. A model could use those general features to classify entire texts. 
@@ -123,7 +123,7 @@ In this example, the convolutional kernel has learned to capture a more general 
 Now, you’ve seen how a convolutional kernel can be applied to a few word embeddings. To process an entire sequence of words, these kernels will slide down a list of word embeddings, in sequence. This is called a **1D convolution** because the kernel is moving in only *one* dimension: time. A single kernel will move one-by-one down a list of input embeddings, looking at the first word embedding (and a small window of next-word embeddings) then the next word embedding, and the next, and so on. The resultant output will be a feature vector that contains about as many values as there were input embeddings, so the input sequence size does matter. I say “about” because sometimes a convolutional kernel will not perfectly overlay on the word embeddings and so some padding may need to be included to account for the height of the kernel. The relationship between padding and kernel size is described in more detail, in a [previous post](https://cezannec.github.io/Convolutional_Neural_Networks/). Below, you can see what the output of a 1D convolution might look like when applied to a short sequence of word embeddings.
 
 <p align="center">
-<img src="/assets/cnn_text/conv_1D_time.gif" alt="Convolutional kernel sliding over a full phrase and producing an output, feature vector." width="400" >
+<img src="/assets/cnn_text/conv_1D_time.gif" alt="Convolutional kernel sliding over a full phrase and producing an output, feature vector." width="600" >
 </p>
 
 ### Multiple Kernels
@@ -140,7 +140,7 @@ Now, we’ve seen how a convolutional operation produces a feature vector that c
 In order to indicate the *presence* of these high-level features, we need a way to identify them in a vector, regardless of the location within the larger input sequence. One way to identify important features, no matter their location in a sequence, is to discard less-relevant, locational information. To do this, we can use a **maxpooling** operation, which forces the network to retain only the maximum value in a feature vector, which should be the most useful, local feature. 
 
 <p align="center">
-<img src="/assets/cnn_text/maxpooling_over_time.png" alt="A feature vector being reduced to its single, largest value through maxpooling." width="500" >
+<img src="/assets/cnn_text/maxpooling_over_time.png" alt="A feature vector being reduced to its single, largest value through maxpooling." width="600" >
 </p>
 
 Since this operation is looking at a sequence of local feature values, it is often called **maxpooling over time**.
@@ -172,7 +172,7 @@ The example code follows the structure outlined in the paper, [Convolutional Neu
 The complete network will see a batch of movie reviews as input. These go through a pre-trained embedding layer, then the sequences of word embeddings go through several convolutional operations, defined in my code as three convolutional layers with kernel heights of 3, 4, and 5. These layers go through a ReLu activation and maxpooling operation. Finally, the max-values from the three different convolutional layers are concatenated and passed to a final, fully-connected, classification layer. 
 
 <p align="center">
-<img src="/assets/cnn_text/complete_text_classification_CNN.png" alt="A complete CNN with convolutional and classification layers for some input text, taken from Yoon Kim's paper." width="500" >
+<img src="/assets/cnn_text/complete_text_classification_CNN.png" alt="A complete CNN with convolutional and classification layers for some input text, taken from Yoon Kim's paper." width="650" >
 </p>
 
 The above image was taken from the original [Convolutional Neural Networks for Sentence Classification paper (Yoon Kim)](https://arxiv.org/abs/1408.5882).
@@ -182,7 +182,7 @@ In my implementation, the classification layer is trained to output a **single**
 After this network trains, you can see how the trained model classifies some sample positive/negative reviews.
 
 <p align="center">
-<img src="/assets/cnn_text/pos_ned_review_ex.png" alt="Examples of positive and negative reviews being classified." width="500" >
+<img src="/assets/cnn_text/pos_neg_review_ex.png" alt="Examples of positive and negative reviews being classified." width="650" >
 </p>
 
 
@@ -197,7 +197,9 @@ As I was writing the text classification code, I found that CNNs are used to ana
 
 I encourage you to read more and try to implement an application that interests you! 
 
+
 ---
+
 If you are interested in my work and thoughts, check out my [Twitter](https://twitter.com/cezannecam) or connect with me on [LinkedIn](https://www.linkedin.com/in/cezanne-camacho-422823b2/).
 
 
