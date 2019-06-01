@@ -21,7 +21,9 @@ Neural networks can only learn to find patterns in numerical data and so, before
 1. For all of the text data—in this case, the movie reviews—we record each of the *unique* words that appear in that dataset and record these as the **vocabulary** of our model. 
 2. We encode each vocabulary word as a unique integer, called a token. Often, these tokens are assigned based on the frequency of occurrence of a word in the dataset. So, the word that appears most frequently throughout the dataset, will have the associated token: 0. For example, if the most common word was “the,” it would have the associated token value of 0. Then the next most common word will be tokenized as 1, and that process continues. 
 3. In code, this word-token association is represented in a **dictionary** that maps each unique word to their token, integer value: 
+    
      `{'the': 0, 'of': 1, 'so': 2, 'then': 3, 'you': 4, … }` 
+        
      There are often so many words in a given dataset that these tokens will range from the value 0 to 100,000 or so.
      
 Finally, after assigning these tokens to individual words, we can then tokenize the entire corpus. For any document in a dataset, like a single movie review, we treat it as a list of words in a sequence. Then we use the token dictionary to convert this list of words into a list of integer values. 
