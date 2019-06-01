@@ -26,7 +26,7 @@ Neural networks can only learn to find patterns in numerical data and so, before
         
      There are often so many words in a given dataset that these tokens will range from the value 0 to 100,000 or so.
      
-Finally, after assigning these tokens to individual words, we can then tokenize the entire corpus. For any document in a dataset, like a single movie review, we treat it as a list of words in a sequence. Then we use the token dictionary to convert this list of words into a list of integer values. 
+4. Finally, after assigning these tokens to individual words, we can then tokenize the entire corpus. For any document in a dataset, like a single movie review, we treat it as a list of words in a sequence. Then we use the token dictionary to convert this list of words into a list of integer values. 
 
 <p align="center">
 <img src="/assets/cnn_text/token_dictionary.png" alt="A dictionary that maps unique words to integer tokens." width="650" >
