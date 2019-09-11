@@ -14,4 +14,4 @@ Cezanne Camacho is a Stanford graduate, having received her Master's in Electric
 
 ---
 
-If you'd like to use any of my original images or text from these posts, please provide the following attribution: Cezanne Camacho, title and year of the post.
+© Cezanne Camacho, 2018-2019. These posts are meant to be used for educational purposes. Excerpts and links from this site may be used, provided that full and clear credit is given to Cezanne Camacho with appropriate and specific direction to the original content.
