@@ -3,10 +3,10 @@
 #
 
 # Name of your site (displayed in the header)
-name: Cezanne Camacho
+name: Yusuf Aslan
 
 # Short bio or description (displayed in the header)
-description: Machine and deep learning educator.
+description: Software Engineer
 
 # URL of your avatar or profile pic (you could use your GitHub profile pic)
 avatar: https://avatars2.githubusercontent.com/u/13972366?s=460&v=4
@@ -18,15 +18,15 @@ avatar: https://avatars2.githubusercontent.com/u/13972366?s=460&v=4
 # Includes an icon in the footer for each username you enter
 footer-links:
   dribbble:
-  email: cezannec@alumni.stanford.edu
+  email: yusufaslan093@gmail.com
   facebook:
   flickr:
-  github: cezannec
+  github: aslnysf
   instagram:
-  linkedin: cezanne-camacho-422823b2/
+  linkedin: https://www.linkedin.com/in/ysfasln/
   pinterest:
   rss: # just type anything here for a working RSS icon
-  twitter: cezannecam
+  twitter: 
   stackoverflow: # your stackoverflow profile, e.g. "users/50476/bart-kiers"
   youtube: # channel/<your_long_string> or user/<user-name>
   googleplus: # anything in your profile username that comes after plus.google.com/
@@ -41,7 +41,7 @@ google_analytics:
 
 # Your website URL (e.g. http://barryclark.github.io or http://www.barryclark.co)
 # Used for Sitemap.xml and your RSS feed
-url: http://cezannec.github.io
+url: http://aslnysf.github.io
 
 # If you're hosting your site at a Project repository on GitHub pages
 # (http://yourusername.github.io/repository-name)
