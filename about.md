@@ -9,8 +9,8 @@ permalink: /about/
 
 ### Contact me
 
-[yusufaslan093@gmail.com](mailto:yusufaslan093@gmail.com)
+[inancdericioglu@gmail.com](mailto:inancdericioglu@gmail.com)
 
 ---
 
-© Yusuf Aslan, 2021. These posts are meant to be used for educational purposes. Excerpts and links from this site may be used, provided that full and clear credit is given to Yusuf Aslan with appropriate and specific direction to the original content.
+© Inanc Dericioglu, 2021. These posts are meant to be used for educational purposes. Excerpts and links from this site may be used, provided that full and clear credit is given to Inanc Dericioglu with appropriate and specific direction to the original content.
